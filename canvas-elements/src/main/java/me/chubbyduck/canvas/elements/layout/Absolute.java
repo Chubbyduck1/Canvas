@@ -10,7 +10,9 @@ import me.chubbyduck.canvas.node.Node;
 import me.chubbyduck.canvas.node.NodeLike;
 import org.jspecify.annotations.NullMarked;
 
-/** Places children at exact pixel positions. */
+/**
+ * Places children at exact pixel positions.
+ */
 @NullMarked
 public class Absolute extends Node {
 
@@ -26,7 +28,9 @@ public class Absolute extends Node {
         return new Builder();
     }
 
-    /** Shorthand for {@link Placement#at(int, int)}. */
+    /**
+     * Shorthand for {@link Placement#at(int, int)}.
+     */
     public static Placement at(final int x, final int y) {
         return Placement.at(x, y);
     }

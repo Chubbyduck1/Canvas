@@ -14,4 +14,5 @@ include(
     "canvas-elements",
     "canvas-paper",
     "canvas-kitchensink",
+    "canvas-codegen",
 )

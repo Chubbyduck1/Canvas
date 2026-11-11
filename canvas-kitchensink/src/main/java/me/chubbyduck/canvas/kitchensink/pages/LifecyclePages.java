@@ -18,14 +18,18 @@ import me.chubbyduck.canvas.state.State;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Pages for opening, reopening, navigating and closing. */
+/**
+ * Pages for opening, reopening, navigating and closing.
+ */
 @NullMarked
 public final class LifecyclePages {
 
     private LifecyclePages() {
     }
 
-    /** Hops out to chat and back: the canvas captured with {@code Canvas.current} reopens with its state intact. */
+    /**
+     * Hops out to chat and back: the canvas captured with {@code Canvas.current} reopens with its state intact.
+     */
     public static class ReopenPage implements NodeLike {
 
         @Override
@@ -53,7 +57,9 @@ public final class LifecyclePages {
         }
     }
 
-    /** Forward and back across canvases. */
+    /**
+     * Forward and back across canvases.
+     */
     public static class NavigationPage implements NodeLike {
 
         private final int level;
@@ -86,7 +92,9 @@ public final class LifecyclePages {
         }
     }
 
-    /** Shows why this canvas last closed. */
+    /**
+     * Shows why this canvas last closed.
+     */
     public static class ClosePage implements NodeLike {
 
         @Override

@@ -10,7 +10,9 @@ import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Collects the native parts of a dialog (inputs, footer buttons, handlers) shared by the glyph and plain compilers. */
+/**
+ * Collects the native parts of a dialog (inputs, footer buttons, handlers) shared by the glyph and plain compilers.
+ */
 @NullMarked
 public class NativeDialogParts {
 
@@ -29,7 +31,9 @@ public class NativeDialogParts {
         this.nonce = nonce;
     }
 
-    /** Registers a handler and returns the SNBT payload that triggers it. */
+    /**
+     * Registers a handler and returns the SNBT payload that triggers it.
+     */
     public String handler(final Runnable handler) {
         final String id = "h" + this.nextHandler++;
         this.handlers.put(id, handler);

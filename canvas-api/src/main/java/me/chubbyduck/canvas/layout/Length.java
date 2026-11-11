@@ -2,7 +2,9 @@ package me.chubbyduck.canvas.layout;
 
 import org.jspecify.annotations.NullMarked;
 
-/** A size along one axis: a fixed pixel count, "fill the available space", or "hug the content". */
+/**
+ * A size along one axis: a fixed pixel count, "fill the available space", or "hug the content".
+ */
 @NullMarked
 public record Length(Kind kind, int pixels) {
 
@@ -21,7 +23,9 @@ public record Length(Kind kind, int pixels) {
         return this.kind == Kind.FILL;
     }
 
-    /** Resolves this length against the measured content size and the available space. */
+    /**
+     * Resolves this length against the measured content size and the available space.
+     */
     public int resolve(final int measured, final int available) {
         return switch (this.kind) {
             case FIXED -> this.pixels;

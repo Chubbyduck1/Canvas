@@ -9,7 +9,9 @@ import java.util.Set;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** All state of one (canvas, player) pair: a list of slots per element path. */
+/**
+ * All state of one (canvas, player) pair: a list of slots per element path.
+ */
 @NullMarked
 public class StateStore {
 
@@ -17,12 +19,16 @@ public class StateStore {
     private final Set<String> touched = new HashSet<>();
     private volatile @Nullable Runnable listener;
 
-    /** Sets the callback that runs when any value changes (the live session's re-render trigger). */
+    /**
+     * Sets the callback that runs when any value changes (the live session's re-render trigger).
+     */
     public synchronized void listen(final @Nullable Runnable listener) {
         this.listener = listener;
     }
 
-    /** Removes the callback, but only if it is still the given one (a newer session may have taken over this store). */
+    /**
+     * Removes the callback, but only if it is still the given one (a newer session may have taken over this store).
+     */
     public synchronized void unlisten(final Runnable listener) {
         if (this.listener == listener) {
             this.listener = null;
@@ -63,7 +69,9 @@ public class StateStore {
         }
     }
 
-    /** The state slots of one element. */
+    /**
+     * The state slots of one element.
+     */
     static class Cells {
 
         public final String owner;

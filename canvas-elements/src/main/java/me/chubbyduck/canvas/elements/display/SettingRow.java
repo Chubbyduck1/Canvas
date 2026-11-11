@@ -14,7 +14,9 @@ import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** A settings row: a label and muted description on the left, a control on the right. */
+/**
+ * A settings row: a label and muted description on the left, a control on the right.
+ */
 @NullMarked
 public class SettingRow extends Composite {
 
@@ -67,7 +69,9 @@ public class SettingRow extends Composite {
             return this;
         }
 
-        /** A styled label. */
+        /**
+         * A styled label.
+         */
         public Builder label(final Component label) {
             this.label = label;
             return this;
@@ -78,7 +82,9 @@ public class SettingRow extends Composite {
             return this;
         }
 
-        /** A styled description. */
+        /**
+         * A styled description.
+         */
         public Builder description(final @Nullable Component description) {
             this.description = description;
             return this;
@@ -89,7 +95,9 @@ public class SettingRow extends Composite {
             return this;
         }
 
-        /** Caps the description's width. */
+        /**
+         * Caps the description's width.
+         */
         public Builder descriptionWidth(final int descriptionWidth) {
             this.descriptionWidth = descriptionWidth;
             return this;

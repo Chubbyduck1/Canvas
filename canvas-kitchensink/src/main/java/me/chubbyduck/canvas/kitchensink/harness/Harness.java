@@ -22,7 +22,9 @@ import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Renders a page headlessly, without a server: used by {@code /ks selftest} and the golden tests. */
+/**
+ * Renders a page headlessly, without a server: used by {@code /ks selftest} and the golden tests.
+ */
 @NullMarked
 public final class Harness {
 
@@ -34,7 +36,9 @@ public final class Harness {
         this.renderer = new Renderer(pack.atlas(), pack.registered()::contains);
     }
 
-    /** A stand-in player audience with a fixed UUID. */
+    /**
+     * A stand-in player audience with a fixed UUID.
+     */
     public static Audience fakeViewer() {
         final UUID id = UUID.nameUUIDFromBytes("kitchensink-test".getBytes(java.nio.charset.StandardCharsets.UTF_8));
         final Pointers pointers = Pointers.builder().withStatic(Identity.UUID, id).build();

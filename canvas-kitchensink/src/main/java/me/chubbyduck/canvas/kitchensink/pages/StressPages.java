@@ -10,7 +10,9 @@ import me.chubbyduck.canvas.state.Scope;
 import me.chubbyduck.canvas.state.State;
 import org.jspecify.annotations.NullMarked;
 
-/** Pages that push the glyph compiler: lots of glyphs, lots of click regions. */
+/**
+ * Pages that push the glyph compiler: lots of glyphs, lots of click regions.
+ */
 @NullMarked
 public final class StressPages {
 
@@ -46,7 +48,9 @@ public final class StressPages {
                 cells.build());
         }
 
-        /** An invisible clickable cell. */
+        /**
+         * An invisible clickable cell.
+         */
         static class Cell extends Node {
 
             private final int id;

@@ -4,7 +4,9 @@ import java.util.Optional;
 import me.chubbyduck.canvas.session.Session;
 import me.chubbyduck.canvas.spi.CanvasPlatform;
 import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public interface CanvasApi {
@@ -23,6 +25,10 @@ public interface CanvasApi {
 
     static void updateCurrentCanvas(final Audience viewer) {
         CanvasApi.getCurrentSession(viewer).ifPresent(Session::updateCanvas);
+    }
+
+    static void registerFontWidth(final @Nullable Key font, final int codepoint, final int width) {
+        CanvasApi.getPlatform().registerFontWidth(font, codepoint, width);
     }
 
 }

@@ -13,7 +13,9 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 
-/** A square button with a pixel arrow, used by steppers, sliders, and pagers. */
+/**
+ * A square button with a pixel arrow, used by steppers, sliders, and pagers.
+ */
 @NullMarked
 public class ArrowButton extends Node {
 

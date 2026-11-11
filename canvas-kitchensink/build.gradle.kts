@@ -29,8 +29,24 @@ tasks.processResources {
     }
 }
 
+// Paper may load plugin classes long after startup (for example, bStats's delayed submission).
+// Keep the running server's jars separate from build/libs, which ordinary builds overwrite.
+runPaper {
+    disablePluginJarDetection()
+}
+
+val runPluginDirectory = layout.buildDirectory.dir("run-plugins")
+val stageRunPlugins = tasks.register<Sync>("stageRunPlugins") {
+    from(tasks.named("jar"))
+    from(project(":canvas-paper").tasks.named("shadowJar"))
+    into(runPluginDirectory)
+}
+
 tasks.named<xyz.jpenilla.runpaper.task.RunServer>("runServer") {
     minecraftVersion("26.3")
-    pluginJars.from(project(":canvas-paper").tasks.named("shadowJar"))
+    dependsOn(stageRunPlugins)
+    pluginJars.setFrom(runPluginDirectory.map { directory ->
+        fileTree(directory) { include("*.jar") }
+    })
     jvmArgs("-Dcom.mojang.eula.agree=true")
 }

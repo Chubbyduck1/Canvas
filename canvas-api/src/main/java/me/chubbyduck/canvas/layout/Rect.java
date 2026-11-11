@@ -2,7 +2,9 @@ package me.chubbyduck.canvas.layout;
 
 import org.jspecify.annotations.NullMarked;
 
-/** An axis-aligned rectangle in canvas pixels. */
+/**
+ * An axis-aligned rectangle in canvas pixels.
+ */
 @NullMarked
 public record Rect(int x, int y, int width, int height) {
 

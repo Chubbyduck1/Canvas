@@ -2,7 +2,9 @@ package me.chubbyduck.canvas.layout;
 
 import org.jspecify.annotations.NullMarked;
 
-/** Padding or border widths. */
+/**
+ * Padding or border widths.
+ */
 @NullMarked
 public record Insets(int top, int right, int bottom, int left) {
 

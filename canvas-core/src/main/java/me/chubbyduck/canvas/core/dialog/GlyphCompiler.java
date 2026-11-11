@@ -5,8 +5,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import me.chubbyduck.canvas.core.atlas.ArabicShaper;
 import me.chubbyduck.canvas.core.atlas.GlyphAtlas;
 import me.chubbyduck.canvas.core.atlas.StyledText;
+import me.chubbyduck.canvas.core.atlas.TextMetrics;
 import me.chubbyduck.canvas.core.render.PaintedFrame;
 import me.chubbyduck.canvas.layout.Rect;
 import net.kyori.adventure.key.Key;
@@ -24,15 +26,21 @@ import net.kyori.adventure.text.format.TextDecoration;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Compiles a {@link PaintedFrame} into a dialog whose body draws the canvas with glyphs. */
+/**
+ * Compiles a {@link PaintedFrame} into a dialog whose body draws the canvas with glyphs.
+ */
 @NullMarked
 public class GlyphCompiler {
 
-    /** Padding the client's plain-message widget (FocusableTextWidget) puts on each side of the text. */
+    /**
+     * Padding the client's plain-message widget (FocusableTextWidget) puts on each side of the text.
+     */
     public static final int BODY_PADDING = 4;
     private static final int ROW = GlyphAtlas.ROW;
     private static final int TEXT_HEIGHT = 8;
-    /** Objects ignore the font; draw them untinted, without shadow or bold. */
+    /**
+     * Objects ignore the font; draw them untinted, without shadow or bold.
+     */
     private static final Style OBJECT_STYLE = Style.style()
         .color(NamedTextColor.WHITE)
         .shadowColor(ShadowColor.none())
@@ -48,7 +56,9 @@ public class GlyphCompiler {
         this.atlas = atlas;
     }
 
-    /** Decides which line each piece is drawn on, so the paint order is exact. */
+    /**
+     * Decides which line each piece is drawn on, so the paint order is exact.
+     */
     static void resolveLines(final List<Emit> all, final int lineCount) {
         final List<List<Emit>> byRow = new ArrayList<>(lineCount);
         for (int i = 0; i < lineCount; i++) {
@@ -81,7 +91,7 @@ public class GlyphCompiler {
                     for (int i = 0; i < j; i++) {
                         final Emit earlier = bucket.get(i);
                         // Objects are drawn at a fixed spot on their line and can't move.
-                        if (earlier.object != null || earlier.line <= later.line || !earlier.overlapsX(later)) {
+                        if ((earlier.object != null || earlier.nativeFont) || earlier.line <= later.line || !earlier.overlapsX(later)) {
                             continue;
                         }
                         final int verticalOffset = earlier.verticalOffset + ROW * (earlier.row - later.line);
@@ -273,17 +283,24 @@ public class GlyphCompiler {
     }
 
     private void emitText(final PaintedFrame.TextOp operation, final List<Emit> output, final int lineCount) {
-        final int row = Math.floorDiv(operation.y(), ROW);
+        final String text = ArabicShaper.shape(operation.text());
+        final boolean nativeFont = TextMetrics.nativeBaseline(operation.style().font(), text);
+        final int row = Math.floorDiv(operation.y() + (nativeFont ? 4 : 0), ROW);
         if (row < 0 || row >= lineCount) {
             return;
         }
-        final int verticalOffset = operation.y() - row * ROW;
+        final int verticalOffset = nativeFont ? 0 : operation.y() - row * ROW;
         int advance = 0;
-        for (int i = 0; i < operation.text().length(); i++) {
-            advance += this.atlas.textAdvance(operation.text().charAt(i), operation.bold());
+        for (int i = 0; i < text.length(); ) {
+            final int codepoint = text.codePointAt(i);
+            advance += this.atlas.textAdvance(operation.style().font(), codepoint, operation.bold());
+            i += Character.charCount(codepoint);
         }
         final int bottomRow = Math.min(lineCount - 1, verticalOffset + TEXT_HEIGHT > ROW ? row + 1 : row);
-        output.add(Emit.text(operation.x(), row, bottomRow, verticalOffset, operation.order(), operation.text(), operation.style(), advance));
+        final Emit emission = Emit.text(operation.x(), row, bottomRow, verticalOffset, operation.order(), text, operation.style(), advance);
+        emission.nativeFont = nativeFont;
+        emission.halfPixelPadding = operation.bold() ? TextMetrics.boldHalfPixelPadding(operation.style().font(), text) : 0;
+        output.add(emission);
     }
 
     private Component line(
@@ -295,6 +312,8 @@ public class GlyphCompiler {
     ) {
         final LineBuilder output = new LineBuilder();
         final Style base = glyphStyle(this.atlas.spriteFont(0));
+
+        output.append("\u2066", base);
 
         // Click section: who owns each pixel column on this row (later hits win).
         final int[] owner = new int[width];
@@ -329,6 +348,7 @@ public class GlyphCompiler {
         final int lineWidth = width + 1;
         if (emits.isEmpty()) {
             output.append(this.atlas.space(lineWidth - width), base);
+            output.append("\u2069", base);
             return output.build();
         }
 
@@ -340,23 +360,31 @@ public class GlyphCompiler {
             final Style style = emission.object != null
                 ? base
                 : emission.isText
-                  ? textStyle(this.atlas.textFont(verticalOffset), Objects.requireNonNull(emission.style))
+                  ? textStyle(emission.nativeFont
+                              ? Objects.requireNonNullElse(Objects.requireNonNull(emission.style).font(), TextMetrics.DEFAULT_FONT)
+                              : this.atlas.textFont(Objects.requireNonNull(emission.style).font(), verticalOffset), emission.style)
                   : plain(this.atlas.spriteFont(verticalOffset), emission.tint);
             if (emission.x != cursor) {
-                // Bold adds a pixel to every glyph, spaces included, so moves must never be bold.
-                final Style move = emission.bold() ? style.decoration(TextDecoration.BOLD, false) : style;
-                output.append(this.atlas.space(emission.x - cursor), move);
+                // Cursor moves always use the Canvas space font, including beside custom fonts.
+                output.append(this.atlas.space(emission.x - cursor), base);
             }
             if (emission.object != null) {
                 output.append(emission.object);
             } else {
+                if (emission.isText) {
+                    output.append("\u2068", base);
+                }
                 output.append(emission.content, style);
+                if (emission.isText) {
+                    output.append("\u2069" + this.atlas.halfPixelSpace(emission.halfPixelPadding), base);
+                }
             }
             cursor = emission.x + emission.advance;
         }
         if (cursor != lineWidth) {
             output.append(this.atlas.space(lineWidth - cursor), base);
         }
+        output.append("\u2069", base);
         return output.build();
     }
 
@@ -369,7 +397,9 @@ public class GlyphCompiler {
         return style.build();
     }
 
-    /** One glyph or text run on a line. */
+    /**
+     * One glyph or text run on a line.
+     */
     static final class Emit {
 
         private final int x;
@@ -381,11 +411,17 @@ public class GlyphCompiler {
         private final int advance;
         private final boolean isText;
         private final @Nullable Style style;
-        /** Color a glyph is drawn with; white keeps a sprite's own colors. */
-        private TextColor tint = NamedTextColor.WHITE;
-        /** An object component to send as is, or {@code null}. */
+        /**
+         * An object component to send as is, or {@code null}.
+         */
         @Nullable Component object;
+        /**
+         * Color a glyph is drawn with; white keeps a sprite's own colors.
+         */
+        private TextColor tint = NamedTextColor.WHITE;
         private int line;
+        private boolean nativeFont;
+        private int halfPixelPadding;
 
         private Emit(
             final int x,
@@ -427,15 +463,13 @@ public class GlyphCompiler {
             return new Emit(x, row, bottomRow, verticalOffset, order, text, advance, true, style);
         }
 
-        boolean bold() {
-            return this.style != null && this.style.decoration(TextDecoration.BOLD) == TextDecoration.State.TRUE;
-        }
-
         int drawDy() {
             return this.verticalOffset + ROW * (this.row - this.line);
         }
 
-        /** Visible horizontal extent; a glyph's advance includes one pixel of spacing. */
+        /**
+         * Visible horizontal extent; a glyph's advance includes one pixel of spacing.
+         */
         boolean overlapsX(final Emit other) {
             final int right = this.x + (this.isText ? this.advance : Math.max(1, this.advance - 1));
             final int otherRight = other.x + (other.isText ? other.advance : Math.max(1, other.advance - 1));
@@ -443,7 +477,9 @@ public class GlyphCompiler {
         }
     }
 
-    /** Builds a line from styled runs, merging adjacent runs with equal styles. */
+    /**
+     * Builds a line from styled runs, merging adjacent runs with equal styles.
+     */
     private static final class LineBuilder {
 
         private final List<Component> parts = new ArrayList<>();

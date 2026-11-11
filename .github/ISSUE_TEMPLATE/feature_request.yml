@@ -1,6 +1,6 @@
 name: Feature request
 description: A new element, layout option or API.
-labels: [enhancement]
+labels: [ enhancement ]
 body:
   - type: textarea
     id: problem

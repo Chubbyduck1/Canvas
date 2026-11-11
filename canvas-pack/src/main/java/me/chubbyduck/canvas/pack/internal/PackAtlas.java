@@ -11,14 +11,19 @@ import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** The glyph lookups produced by the pack builder. */
+/**
+ * The glyph lookups produced by the pack builder.
+ */
 @NullMarked
 public class PackAtlas implements GlyphAtlas {
 
     public static final String NAMESPACE = "canvas";
-    /** Largest power-of-two space glyph; moves are built from 1, 2, 4, up to this. */
+    /**
+     * Largest power-of-two space glyph; moves are built from 1, 2, 4, up to this.
+     */
     public static final int MAX_SPACE_BIT = 10;
     public static final int SPACE_BASE = 0xE000;
+    public static final int HALF_PIXEL_SPACE = SPACE_BASE + 2 * (MAX_SPACE_BIT + 1);
     public static final int MID_PIECES = 8;
 
     public final Map<String, Map<Key, SpriteData>> sprites = new HashMap<>();
@@ -34,12 +39,16 @@ public class PackAtlas implements GlyphAtlas {
         }
     }
 
-    /** Codepoint of the space glyph moving by {@code 2^bit} pixels, forwards or backwards. */
+    /**
+     * Codepoint of the space glyph moving by {@code 2^bit} pixels, forwards or backwards.
+     */
     public static int spaceCodepoint(final int bit, final boolean negative) {
         return SPACE_BASE + (negative ? MAX_SPACE_BIT + 1 : 0) + bit;
     }
 
-    /** Which source rows make up rows {@code [start, end)} of a nine-slice drawn {@code height} tall. */
+    /**
+     * Which source rows make up rows {@code [start, end)} of a nine-slice drawn {@code height} tall.
+     */
     public static List<Integer> composition(
         final int height,
         final int start,
@@ -149,12 +158,21 @@ public class PackAtlas implements GlyphAtlas {
         return out.toString();
     }
 
-    /** A sprite's size and its band glyphs for each phase. */
+    @Override
+    public String halfPixelSpace(final int count) {
+        return Character.toString(HALF_PIXEL_SPACE).repeat(count);
+    }
+
+    /**
+     * A sprite's size and its band glyphs for each phase.
+     */
     @SuppressWarnings("ArrayRecordComponent") // never compared or hashed
     public record SpriteData(Size size, @Nullable Glyph[][] bands) {
     }
 
-    /** A nine-slice skin's borders and its band pieces per row composition. */
+    /**
+     * A nine-slice skin's borders and its band pieces per row composition.
+     */
     public static class NineData {
 
         public final Insets border;

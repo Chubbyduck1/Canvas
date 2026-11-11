@@ -2,7 +2,9 @@ package me.chubbyduck.canvas.pack;
 
 import org.jspecify.annotations.NullMarked;
 
-/** Resource pack metadata and options. */
+/**
+ * Resource pack metadata and options.
+ */
 @NullMarked
 public record PackOptions(int minFormat, int maxFormat, String description, boolean hideFocusOutline) {
 

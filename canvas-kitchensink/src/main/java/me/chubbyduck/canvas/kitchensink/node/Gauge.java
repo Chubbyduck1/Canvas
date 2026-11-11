@@ -13,7 +13,9 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 
-/** Example third-party primitive: a segmented meter. */
+/**
+ * Example third-party primitive: a segmented meter.
+ */
 @NullMarked
 public class Gauge extends Node {
 

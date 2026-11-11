@@ -1,6 +1,7 @@
 package me.chubbyduck.canvas.elements.control;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -15,7 +16,9 @@ import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** A list of tab buttons with one selected: vertical like a settings sidebar, or horizontal. */
+/**
+ * A list of tab buttons with one selected: vertical like a settings sidebar, or horizontal.
+ */
 @NullMarked
 public class Tabs<T> extends Composite {
 
@@ -68,9 +71,7 @@ public class Tabs<T> extends Composite {
 
         @SafeVarargs
         public final Builder<T> tabs(final T... tabs) {
-            for (final T value : tabs) {
-                this.tabs.add(value);
-            }
+            this.tabs.addAll(Arrays.asList(tabs));
             return this;
         }
 
@@ -84,7 +85,9 @@ public class Tabs<T> extends Composite {
             return this;
         }
 
-        /** Styled labels. */
+        /**
+         * Styled labels.
+         */
         public Builder<T> labelComponent(final Function<? super T, ? extends Component> label) {
             this.label = label;
             return this;

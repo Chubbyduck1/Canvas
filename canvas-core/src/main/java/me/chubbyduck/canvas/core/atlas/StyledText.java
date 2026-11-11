@@ -15,20 +15,28 @@ import net.kyori.adventure.text.object.ObjectContents;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Measures, wraps and splits Adventure components for drawing with the Canvas text fonts. */
+/**
+ * Measures, wraps and splits Adventure components for drawing with the Canvas text fonts.
+ */
 @NullMarked
 public final class StyledText {
 
-    /** Advance of an object component (sprite or player head). */
+    /**
+     * Advance of an object component (sprite or player head).
+     */
     public static final int OBJECT_ADVANCE = 8;
 
-    /** Stands in for an object in a run's text. */
+    /**
+     * Stands in for an object in a run's text.
+     */
     public static final char OBJECT_CHAR = '￼';
 
     private StyledText() {
     }
 
-    /** Flattens a component into styled runs, inheriting styles from parents. */
+    /**
+     * Flattens a component into styled runs, inheriting styles from parents.
+     */
     public static List<Run> runs(final Component component) {
         final List<Run> runs = new ArrayList<>();
         final Deque<Style> stack = new ArrayDeque<>();
@@ -81,10 +89,7 @@ public final class StyledText {
     }
 
     private static String clean(final String text) {
-        final StringBuilder out = new StringBuilder(text.length());
-        text.replace('\t', ' ').codePoints().forEach(codepoint ->
-            out.append(codepoint == '\n' || TextMetrics.isSupported(codepoint) ? (char) codepoint : TextMetrics.REPLACEMENT));
-        return out.toString();
+        return ArabicShaper.shape(text.replace('\t', ' '));
     }
 
     public static String plain(final Component component) {
@@ -108,10 +113,11 @@ public final class StyledText {
             return OBJECT_ADVANCE;
         }
         int width = 0;
-        for (int i = 0; i < run.text().length(); i++) {
-            final char character = run.text().charAt(i);
+        for (int i = 0; i < run.text().length(); ) {
+            final int character = run.text().codePointAt(i);
+            i += Character.charCount(character);
             if (character != '\n') {
-                width += TextMetrics.advance(character, run.bold());
+                width += TextMetrics.advance(run.style().font(), character, run.bold());
             }
         }
         return width;
@@ -129,21 +135,24 @@ public final class StyledText {
                 paragraph.add(new Cell(OBJECT_CHAR, run.style(), OBJECT_ADVANCE, run.object()));
                 continue;
             }
-            for (int i = 0; i < run.text().length(); i++) {
-                final char character = run.text().charAt(i);
+            for (int i = 0; i < run.text().length(); ) {
+                final int character = run.text().codePointAt(i);
+                i += Character.charCount(character);
                 if (character == '\n') {
                     wrapParagraph(paragraph, maxWidth, lines);
                     paragraph.clear();
                     continue;
                 }
-                paragraph.add(new Cell(character, run.style(), TextMetrics.advance(character, run.bold()), null));
+                paragraph.add(new Cell(character, run.style(), TextMetrics.advance(run.style().font(), character, run.bold()), null));
             }
         }
         wrapParagraph(paragraph, maxWidth, lines);
         return lines;
     }
 
-    /** The longest prefix of a single line that fits in {@code maxWidth}. */
+    /**
+     * The longest prefix of a single line that fits in {@code maxWidth}.
+     */
     public static Component fit(final Component component, final int maxWidth) {
         final List<Cell> cells = new ArrayList<>();
         int width = 0;
@@ -156,12 +165,13 @@ public final class StyledText {
                 cells.add(new Cell(OBJECT_CHAR, run.style(), OBJECT_ADVANCE, run.object()));
                 continue;
             }
-            for (int i = 0; i < run.text().length(); i++) {
-                final char character = run.text().charAt(i);
+            for (int i = 0; i < run.text().length(); ) {
+                final int character = run.text().codePointAt(i);
+                i += Character.charCount(character);
                 if (character == '\n') {
                     continue;
                 }
-                final int advance = TextMetrics.advance(character, run.bold());
+                final int advance = TextMetrics.advance(run.style().font(), character, run.bold());
                 if (width + advance > maxWidth) {
                     return join(cells);
                 }
@@ -212,7 +222,9 @@ public final class StyledText {
         return width;
     }
 
-    /** Rebuilds a component from cells, merging neighbors with the same style. */
+    /**
+     * Rebuilds a component from cells, merging neighbors with the same style.
+     */
     private static Component join(final List<Cell> cells) {
         final TextComponent.Builder out = Component.text();
         final StringBuilder run = new StringBuilder();
@@ -232,7 +244,7 @@ public final class StyledText {
                 run.setLength(0);
             }
             style = cell.style;
-            run.append(cell.character);
+            run.appendCodePoint(cell.character);
         }
         if (style != null && !run.isEmpty()) {
             out.append(Component.text(run.toString(), style));
@@ -240,7 +252,9 @@ public final class StyledText {
         return out.build();
     }
 
-    /** A piece of text with one style, or a single object. */
+    /**
+     * A piece of text with one style, or a single object.
+     */
     public record Run(String text, Style style, @Nullable ObjectContents object) {
 
         public Run(final String text, final Style style) {
@@ -256,8 +270,10 @@ public final class StyledText {
         }
     }
 
-    /** One character (or object) with its style and advance. */
-    private record Cell(char character, Style style, int advance, @Nullable ObjectContents object) {
+    /**
+     * One character (or object) with its style and advance.
+     */
+    private record Cell(int character, Style style, int advance, @Nullable ObjectContents object) {
 
         boolean isSpace() {
             return this.object == null && this.character == ' ';

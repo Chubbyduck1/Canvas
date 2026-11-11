@@ -4,11 +4,15 @@ import java.util.List;
 import me.chubbyduck.canvas.asset.Theme;
 import org.jspecify.annotations.NullMarked;
 
-/** The built-in OreUI themes. */
+/**
+ * The built-in OreUI themes.
+ */
 @NullMarked
 public final class Themes {
 
-    /** Light grey cards and buttons, dark text, green selection. */
+    /**
+     * Light grey cards and buttons, dark text, green selection.
+     */
     public static final Theme ORE = new Theme(
         "ore",
         new Theme.Palette(
@@ -36,7 +40,9 @@ public final class Themes {
         new Theme.Metrics(1, 1, 20, 20, 6)
     );
 
-    /** The same structure with dark surfaces and light text. */
+    /**
+     * The same structure with dark surfaces and light text.
+     */
     public static final Theme ORE_DARK = new Theme(
         "ore_dark",
         new Theme.Palette(

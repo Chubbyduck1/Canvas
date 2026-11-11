@@ -10,7 +10,9 @@ import me.chubbyduck.canvas.node.Node;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** A node after its custom elements were resolved, with layout results. */
+/**
+ * A node after its custom elements were resolved, with layout results.
+ */
 @NullMarked
 public class ResolvedNode {
 

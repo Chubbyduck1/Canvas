@@ -20,7 +20,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NullMarked;
 
-/** {@code /ks [page | reopen | theme | plain [on|off] | debug | selftest]}. */
+/**
+ * {@code /ks [page | reopen | theme | plain [on|off] | debug | selftest]}.
+ */
 @NullMarked
 public final class KitchensinkCommand implements BasicCommand {
 

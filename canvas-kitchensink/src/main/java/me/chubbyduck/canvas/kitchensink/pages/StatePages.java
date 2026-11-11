@@ -18,7 +18,9 @@ import me.chubbyduck.canvas.state.State;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Pages for {@code useState}: updates, batching, passing state down, keyed children. */
+/**
+ * Pages for {@code useState}: updates, batching, passing state down, keyed children.
+ */
 @NullMarked
 public final class StatePages {
 
@@ -44,7 +46,9 @@ public final class StatePages {
         }
     }
 
-    /** One click sets state ten times; the render counter should go up by exactly one. */
+    /**
+     * One click sets state ten times; the render counter should go up by exactly one.
+     */
     public static class BatchingPage implements NodeLike {
 
         @Override
@@ -77,7 +81,9 @@ public final class StatePages {
             );
         }
 
-        /** A custom element receiving the parent's state as a constructor argument. */
+        /**
+         * A custom element receiving the parent's state as a constructor argument.
+         */
         static class Child implements NodeLike {
 
             private final String name;
@@ -98,7 +104,9 @@ public final class StatePages {
         }
     }
 
-    /** Each row has its own counter state; shuffling the keyed rows keeps each counter with its row. */
+    /**
+     * Each row has its own counter state; shuffling the keyed rows keeps each counter with its row.
+     */
     public static class KeyedListPage implements NodeLike {
 
         @Override

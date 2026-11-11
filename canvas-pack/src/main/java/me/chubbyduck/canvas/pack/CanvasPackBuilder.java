@@ -29,7 +29,9 @@ import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Builds the Canvas resource pack from the registered node classes and themes. */
+/**
+ * Builds the Canvas resource pack from the registered node classes and themes.
+ */
 @NullMarked
 public class CanvasPackBuilder {
 
@@ -53,7 +55,9 @@ public class CanvasPackBuilder {
         }
     }
 
-    /** Splits a sprite into row bands for each of the 9 possible vertical phases. */
+    /**
+     * Splits a sprite into row bands for each of the 9 possible vertical phases.
+     */
     static PackAtlas.SpriteData spriteData(final BufferedImage image, final GlyphTable glyphs) {
         final int row = GlyphAtlas.ROW;
         final int height = image.getHeight();

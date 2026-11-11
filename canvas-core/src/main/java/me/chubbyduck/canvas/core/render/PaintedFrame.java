@@ -26,7 +26,9 @@ public record PaintedFrame(
     List<String> warnings
 ) {
 
-    /** A draw operation. */
+    /**
+     * A draw operation.
+     */
     public sealed interface DrawOp {
 
         long order();
@@ -38,7 +40,9 @@ public record PaintedFrame(
     public record NineOp(NineSlice skin, Rect rect, long order) implements DrawOp {
     }
 
-    /** An object component (atlas sprite or player head). */
+    /**
+     * An object component (atlas sprite or player head).
+     */
     public record ObjectOp(net.kyori.adventure.text.object.ObjectContents contents, int x, int y,
                            long order) implements DrawOp {
 
@@ -50,7 +54,9 @@ public record PaintedFrame(
     public record BarOp(int x, int y, int width, int rgb, long order) implements DrawOp {
     }
 
-    /** One run of text in a single style. */
+    /**
+     * One run of text in a single style.
+     */
     public record TextOp(String text, int x, int y, Style style, long order) implements DrawOp {
 
         public boolean bold() {
@@ -58,7 +64,9 @@ public record PaintedFrame(
         }
     }
 
-    /** A click region. */
+    /**
+     * A click region.
+     */
     public record Hit(Rect rect, Runnable onClick, @Nullable Component tooltip, long order) {
     }
 }

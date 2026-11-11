@@ -13,7 +13,9 @@ import me.chubbyduck.canvas.core.dialog.RenderedDialog;
 import net.kyori.adventure.nbt.api.BinaryTagHolder;
 import org.jspecify.annotations.NullMarked;
 
-/** Converts the platform-neutral {@link RenderedDialog} into a Paper {@link Dialog}. */
+/**
+ * Converts the platform-neutral {@link RenderedDialog} into a Paper {@link Dialog}.
+ */
 @NullMarked
 public final class DialogAdapter {
 
@@ -63,21 +65,20 @@ public final class DialogAdapter {
             case final me.chubbyduck.canvas.paint.DialogInput.Bool bool -> DialogInput.bool(key, bool.label())
                 .initial(bool.initial())
                 .build();
-            case final me.chubbyduck.canvas.paint.DialogInput.Range range ->
-                DialogInput.numberRange(key, range.label(), range.start(), range.end())
-                    .labelFormat(range.labelFormat())
-                    .step(range.step())
-                    .initial(range.initial())
-                    .width(range.width())
-                    .build();
+            case final me.chubbyduck.canvas.paint.DialogInput.Range range -> DialogInput.numberRange(key, range.label(), range.start(), range.end())
+                .labelFormat(range.labelFormat())
+                .step(range.step())
+                .initial(range.initial())
+                .width(range.width())
+                .build();
             case final me.chubbyduck.canvas.paint.DialogInput.Options options -> DialogInput.singleOption(
-                key,
-                options.label(),
-                options.options().stream()
-                    .map(option -> SingleOptionDialogInput.OptionEntry.create(
-                        option.id(), option.display(), option.id().equals(options.initialId())))
-                    .toList()
-            )
+                    key,
+                    options.label(),
+                    options.options().stream()
+                        .map(option -> SingleOptionDialogInput.OptionEntry.create(
+                            option.id(), option.display(), option.id().equals(options.initialId())))
+                        .toList()
+                )
                 .labelVisible(options.labelVisible())
                 .width(options.width())
                 .build();

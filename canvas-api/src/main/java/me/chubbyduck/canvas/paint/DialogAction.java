@@ -4,7 +4,9 @@ import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** A native footer button. */
+/**
+ * A native footer button.
+ */
 @NullMarked
 public record DialogAction(Component label, @Nullable Component tooltip, int width, Runnable onClick) {
 

@@ -2,7 +2,9 @@ package me.chubbyduck.canvas.layout;
 
 import org.jspecify.annotations.NullMarked;
 
-/** Where an absolutely positioned child goes. */
+/**
+ * Where an absolutely positioned child goes.
+ */
 @NullMarked
 public record Placement(int x, int y, int width, int height) {
 

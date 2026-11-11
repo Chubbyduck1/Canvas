@@ -5,7 +5,9 @@ import java.util.Map;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Reads the top-level scalar fields of an SNBT compound, e.g. {@code {s:"abc",v:3,a:'h0'}}. */
+/**
+ * Reads the top-level scalar fields of an SNBT compound, e.g. {@code {s:"abc",v:3,a:'h0'}}.
+ */
 @NullMarked
 public final class SnbtParser {
 

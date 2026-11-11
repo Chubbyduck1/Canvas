@@ -17,7 +17,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.jspecify.annotations.NullMarked;
 
-/** Paper implementation of the kitchensink hooks: chat prompts and opening an inventory. */
+/**
+ * Paper implementation of the kitchensink hooks: chat prompts and opening an inventory.
+ */
 @NullMarked
 public final class ChatPrompts implements KitchensinkHooks, Listener {
 

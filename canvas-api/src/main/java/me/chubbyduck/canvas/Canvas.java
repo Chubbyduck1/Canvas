@@ -12,11 +12,15 @@ import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** The root element, plus options. */
+/**
+ * The root element, plus options.
+ */
 @NullMarked
 public class Canvas {
 
-    /** Widest canvas in GUI pixels: a 400px screen minus the dialog's 20px scroll area and 9px padding. */
+    /**
+     * Widest canvas in GUI pixels: a 400px screen minus the dialog's 20px scroll area and 9px padding.
+     */
     public static final int MAX_WIDTH = 400 - (20 + 9);
 
     private final NodeLike root;
@@ -36,7 +40,9 @@ public class Canvas {
         return this;
     }
 
-    /** Fixes the canvas size in GUI pixels. */
+    /**
+     * Fixes the canvas size in GUI pixels.
+     */
     public Canvas size(final int width, final int height) {
         if (width < 1 || height < 1 || width > MAX_WIDTH) {
             throw new IllegalArgumentException("Canvas size must be 1.." + MAX_WIDTH + " wide and at least 1 tall");
@@ -69,7 +75,9 @@ public class Canvas {
         return CanvasPlatform.get().open(this, viewer, mode);
     }
 
-    /** Discards the state retained for this viewer. */
+    /**
+     * Discards the state retained for this viewer.
+     */
     public void reset(final Audience viewer) {
         CanvasPlatform.get().reset(this, viewer);
     }

@@ -10,11 +10,15 @@ import me.chubbyduck.canvas.core.atlas.GlyphAtlas;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Every generated glyph image, de-duplicated by content, with its codepoint. */
+/**
+ * Every generated glyph image, de-duplicated by content, with its codepoint.
+ */
 @NullMarked
 public class GlyphTable {
 
-    /** First codepoint used for glyphs; U+E000..U+E0FF are reserved for space glyphs. */
+    /**
+     * First codepoint used for glyphs; U+E000..U+E0FF are reserved for space glyphs.
+     */
     public static final int FIRST_GLYPH = 0xE100;
     private static final int BMP_PUA_END = 0xF8FF;
     private static final int PLANE15_START = 0xF0000;
@@ -25,7 +29,9 @@ public class GlyphTable {
     private final TreeMap<Integer, List<Integer>> byWidth = new TreeMap<>();
     private int next = FIRST_GLYPH;
 
-    /** Adds a band image (at most one row tall). */
+    /**
+     * Adds a band image (at most one row tall).
+     */
     public GlyphAtlas.@Nullable Glyph add(final BufferedImage band) {
         if (band.getHeight() > GlyphAtlas.ROW) {
             throw new IllegalArgumentException("Band taller than a row: " + band.getHeight());
@@ -61,7 +67,9 @@ public class GlyphTable {
         return codepoint;
     }
 
-    /** Lays the glyphs out in sheets. */
+    /**
+     * Lays the glyphs out in sheets.
+     */
     public List<Sheet> sheets() {
         final List<Sheet> sheets = new ArrayList<>();
         for (final Map.Entry<Integer, List<Integer>> entry : this.byWidth.entrySet()) {
@@ -99,7 +107,9 @@ public class GlyphTable {
         return new Sheet("font/sheet_" + index + ".png", image, chars);
     }
 
-    /** A texture holding a grid of glyphs. */
+    /**
+     * A texture holding a grid of glyphs.
+     */
     public record Sheet(String path, BufferedImage image, List<String> chars) {
     }
 }

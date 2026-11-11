@@ -10,6 +10,7 @@ import me.chubbyduck.canvas.asset.Sprite;
 import me.chubbyduck.canvas.asset.Theme;
 import me.chubbyduck.canvas.core.atlas.GlyphAtlas;
 import me.chubbyduck.canvas.core.atlas.StyledText;
+import me.chubbyduck.canvas.core.atlas.TextMetrics;
 import me.chubbyduck.canvas.core.state.ScopeImpl;
 import me.chubbyduck.canvas.layout.LayoutContext;
 import me.chubbyduck.canvas.layout.Rect;
@@ -28,7 +29,9 @@ import net.kyori.adventure.text.object.ObjectContents;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Resolves custom elements, lays the tree out and paints it into a {@link PaintedFrame}. */
+/**
+ * Resolves custom elements, lays the tree out and paints it into a {@link PaintedFrame}.
+ */
 @NullMarked
 public class Renderer {
 
@@ -42,7 +45,9 @@ public class Renderer {
         this.registered = registered;
     }
 
-    /** Turns the element tree into nodes, calling {@code getNode} on every custom element. */
+    /**
+     * Turns the element tree into nodes, calling {@code getNode} on every custom element.
+     */
     public ResolvedNode resolve(final NodeLike root, final ScopeFactory scopes) {
         return this.resolve(root, "root:" + root.getClass().getName(), scopes);
     }
@@ -82,7 +87,9 @@ public class Renderer {
         }
     }
 
-    /** Lays out and paints a resolved tree. */
+    /**
+     * Lays out and paints a resolved tree.
+     */
     public PaintedFrame paint(final ResolvedNode root, final int fixedWidth, final int fixedHeight, final Theme theme, final boolean debug) {
         return this.paint(root, fixedWidth, fixedHeight, 0, 0, theme, debug);
     }
@@ -152,7 +159,9 @@ public class Renderer {
         }
     }
 
-    /** Creates scopes for custom elements. */
+    /**
+     * Creates scopes for custom elements.
+     */
     @FunctionalInterface
     public interface ScopeFactory {
 
@@ -303,15 +312,19 @@ public class Renderer {
                 this.warnings.add("Text \"" + StyledText.plain(text) + "\" from " + this.who() + " was cut off at the canvas edge");
             }
             final TextColor fallback = TextColor.color(this.theme.palette().text() & 0xFFFFFF);
+            final var runs = StyledText.runs(line);
+            final boolean nativeBaseline = runs.stream().anyMatch(run -> run.isObject()
+                || TextMetrics.nativeBaseline(run.style().font(), run.text()));
+            final int drawY = nativeBaseline ? Math.floorDiv(y + 4, 9) * 9 : y;
             int cursor = x;
-            for (final StyledText.Run run : StyledText.runs(line)) {
+            for (final StyledText.Run run : runs) {
                 final ObjectContents object = run.object();
                 if (object != null) {
                     if (Math.floorMod(y, 9) != 0) {
                         this.warnings.add("Object in text from " + this.who() + " at y=" + y
                             + " is off the 9px row grid; the client draws it on the nearest row");
                     }
-                    this.ops.add(new PaintedFrame.ObjectOp(object, cursor, y, this.order()));
+                    this.ops.add(new PaintedFrame.ObjectOp(object, cursor, drawY, this.order()));
                     cursor += StyledText.OBJECT_ADVANCE;
                     continue;
                 }
@@ -325,15 +338,15 @@ public class Renderer {
                 // The client draws these lines at the text line's position, ignoring the offset
                 // font, so they would land up to 8px too high. Draw them as bars instead.
                 final Style glyphs = style.decoration(TextDecoration.UNDERLINED, false).decoration(TextDecoration.STRIKETHROUGH, false);
-                this.ops.add(new PaintedFrame.TextOp(content, cursor, y, glyphs, this.order()));
+                this.ops.add(new PaintedFrame.TextOp(content, cursor, drawY, glyphs, this.order()));
                 final int width = StyledText.width(new StyledText.Run(content, style));
                 // Same extent as vanilla: one pixel left of the run to the end of its advance.
                 final int rgb = java.util.Objects.requireNonNullElse(style.color(), fallback).value();
                 if (underlined) {
-                    this.bar(cursor - 1, y + 8, width + 1, rgb);
+                    this.bar(cursor - 1, drawY + 8, width + 1, rgb);
                 }
                 if (struck) {
-                    this.bar(cursor - 1, y + 4, width + 1, rgb);
+                    this.bar(cursor - 1, drawY + 4, width + 1, rgb);
                 }
                 cursor += width;
             }

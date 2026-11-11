@@ -12,7 +12,9 @@ import net.kyori.adventure.text.format.TextDecoration;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Given to {@link Node#paint}. */
+/**
+ * Given to {@link Node#paint}.
+ */
 @NullMarked
 public interface PaintContext {
 
@@ -26,15 +28,21 @@ public interface PaintContext {
 
     void nineSlice(NineSlice skin, Rect rect);
 
-    /** Draws one line of styled text (newlines are ignored; wrap with the {@code Text} element). */
+    /**
+     * Draws one line of styled text (newlines are ignored; wrap with the {@code Text} element).
+     */
     void text(Component text, int x, int y);
 
-    /** Draws styled text with a default color for the parts that don't set their own. */
+    /**
+     * Draws styled text with a default color for the parts that don't set their own.
+     */
     default void text(final Component text, final int x, final int y, final int color) {
         this.text(Component.text().color(TextColor.color(color)).append(text).build(), x, y);
     }
 
-    /** Shortcut for plain text in one color. */
+    /**
+     * Shortcut for plain text in one color.
+     */
     default void text(final String text, final int x, final int y, final int color, final boolean bold) {
         this.text(
             Component.text(text, TextColor.color(color)).decoration(TextDecoration.BOLD, bold),
@@ -51,17 +59,23 @@ public interface PaintContext {
 
     Size spriteSize(Sprite sprite);
 
-    /** Makes a rectangle clickable. */
+    /**
+     * Makes a rectangle clickable.
+     */
     void hit(Rect rect, Runnable onClick, @Nullable Component tooltip);
 
     default void hit(final Rect rect, final Runnable onClick) {
         this.hit(rect, onClick, null);
     }
 
-    /** Adds a native dialog input. */
+    /**
+     * Adds a native dialog input.
+     */
     void input(DialogInput input);
 
-    /** Adds a native button to the dialog footer. */
+    /**
+     * Adds a native button to the dialog footer.
+     */
     void footer(DialogAction action);
 
 }

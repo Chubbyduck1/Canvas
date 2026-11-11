@@ -83,7 +83,9 @@ public final class FocusOutlineShader {
             + "}\n";
     }
 
-    /** The {@code overlays} section of pack.mcmeta. */
+    /**
+     * The {@code overlays} section of pack.mcmeta.
+     */
     public static String overlaysJson() {
         final StringBuilder out = new StringBuilder("  \"overlays\": {\n    \"entries\": [\n");
         for (int i = 0; i < VARIANTS.size(); i++) {
@@ -97,7 +99,9 @@ public final class FocusOutlineShader {
         return out.append("    ]\n  }\n").toString();
     }
 
-    /** One shader variant. */
+    /**
+     * One shader variant.
+     */
     public record Variant(int minFormat, int maxFormat, String directory, String source) {
     }
 }

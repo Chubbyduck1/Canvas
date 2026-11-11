@@ -1,6 +1,7 @@
 package me.chubbyduck.canvas.elements.control;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -77,9 +78,7 @@ public class Dropdown<T> implements NodeLike {
 
         @SafeVarargs
         public final Builder<T> options(final T... options) {
-            for (final T value : options) {
-                this.options.add(value);
-            }
+            this.options.addAll(Arrays.asList(options));
             return this;
         }
 
@@ -93,13 +92,17 @@ public class Dropdown<T> implements NodeLike {
             return this;
         }
 
-        /** Styled labels. */
+        /**
+         * Styled labels.
+         */
         public Builder<T> labelComponent(final Function<? super T, ? extends Component> label) {
             this.label = label;
             return this;
         }
 
-        /** An icon for each option, drawn left of its label (e.g. a flag). */
+        /**
+         * An icon for each option, drawn left of its label (e.g. a flag).
+         */
         public Builder<T> icon(final @Nullable Function<T, Sprite> icon) {
             this.icon = icon;
             return this;
@@ -115,13 +118,17 @@ public class Dropdown<T> implements NodeLike {
             return this;
         }
 
-        /** Fixed width; by default the widest option decides. */
+        /**
+         * Fixed width; by default the widest option decides.
+         */
         public Builder<T> width(final int width) {
             this.width = width;
             return this;
         }
 
-        /** Identifies this dropdown among its siblings so its open state follows it. */
+        /**
+         * Identifies this dropdown among its siblings so its open state follows it.
+         */
         public Builder<T> key(final @Nullable String key) {
             this.key = key;
             return this;

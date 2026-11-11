@@ -4,11 +4,15 @@ import me.chubbyduck.canvas.paint.DialogInput;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Delivers a player's input value to the {@link DialogInput}'s callback, validating it first. */
+/**
+ * Delivers a player's input value to the {@link DialogInput}'s callback, validating it first.
+ */
 @NullMarked
 public record InputBinding(DialogInput input) {
 
-    /** Applies the value read from a dialog response. */
+    /**
+     * Applies the value read from a dialog response.
+     */
     public void apply(final InputReader reader, final String key) {
         switch (this.input) {
             case final DialogInput.Text text -> {
@@ -44,7 +48,9 @@ public record InputBinding(DialogInput input) {
         }
     }
 
-    /** Reads values from a dialog response. */
+    /**
+     * Reads values from a dialog response.
+     */
     public interface InputReader {
 
         @Nullable String text(String key);

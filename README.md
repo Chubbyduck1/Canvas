@@ -92,15 +92,28 @@ server pack) and send it to players.
 
 `plugins/Canvas/config.yml`:
 
-| Option         | Default | Effect                                                                                     |
+| Option         | Default | Effect                                                                                    |
 |----------------|---------|-------------------------------------------------------------------------------------------|
 | `require-pack` | `false` | `true`: plain dialogs until a resource pack has loaded (`.requirePack(true)` when shaded) |
 | `metrics`      | `true`  | Anonymous usage statistics on [bStats](https://bstats.org)                                |
+
+## Text fonts and widths
+
+Unknown glyphs are measured as 5 pixels, including the spacing pixel. This can be wrong, and if it is, it will offset
+the entire dialog. Simply register an override for it!
+
+```java
+CanvasApi.registerFontWidth(Key.key("myplugin", "icons"), 0xE100,12);
+CanvasApi.registerFontWidth(Key.key("minecraft", "default"), '\u6F22',9);
+Component icon = Component.text("\uE100").font(Key.key("myplugin", "icons"));
+```
 
 ## Build
 
 `./gradlew build` builds every module and `canvas-paper/build/libs/Canvas-<version>.jar`.
 `./gradlew runServer` starts a test server with the example plugin (`/ks`).
+It stages both plugin jars in `canvas-kitchensink/build/run-plugins` before launch, so rebuilding while the server
+is running does not overwrite its loaded jars. Restart `runServer` to pick up a new build.
 
 ## Notice
 
@@ -108,7 +121,8 @@ Canvas is not affiliated with or endorsed by Mojang Studios or Microsoft. Minecr
 Studios. The generated pack reuses the vanilla font by reference (no Mojang assets are shipped) and includes an
 optional `core/gui` shader derived from vanilla's, which hides the dialog focus outline.
 
-The project was partially generated with Claude Opus 5.5. My reasoning was as follows: Just wanted to make it work, can make it pretty later :)
+The project was partially generated with Claude Opus 5.5. My reasoning was as follows: Just wanted to make it work, can
+make it pretty later :)
 
 ## License
 

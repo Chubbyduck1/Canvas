@@ -9,7 +9,9 @@ import javax.imageio.ImageIO;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Small image helpers. */
+/**
+ * Small image helpers.
+ */
 @NullMarked
 public final class ImageTools {
 
@@ -25,7 +27,9 @@ public final class ImageTools {
         return copy;
     }
 
-    /** Copies a region, filling anything outside the source with transparency. */
+    /**
+     * Copies a region, filling anything outside the source with transparency.
+     */
     public static BufferedImage crop(final BufferedImage source, final int x, final int y, final int width, final int height) {
         final BufferedImage output = new BufferedImage(Math.max(1, width), Math.max(1, height), BufferedImage.TYPE_INT_ARGB);
         for (int offsetY = 0; offsetY < height; offsetY++) {
@@ -40,7 +44,9 @@ public final class ImageTools {
         return output;
     }
 
-    /** Minecraft's bitmap glyph width rule: index of the rightmost column with any non-transparent pixel, plus one. */
+    /**
+     * Minecraft's bitmap glyph width rule: index of the rightmost column with any non-transparent pixel, plus one.
+     */
     public static int opaqueWidth(final BufferedImage image) {
         for (int x = image.getWidth() - 1; x >= 0; x--) {
             for (int y = 0; y < image.getHeight(); y++) {
@@ -65,7 +71,9 @@ public final class ImageTools {
         }
     }
 
-    /** Identity of an image's pixels, used to deduplicate glyphs. */
+    /**
+     * Identity of an image's pixels, used to deduplicate glyphs.
+     */
     @SuppressWarnings("ArrayRecordComponent") // equals and hashCode compare the pixels
     public record Key(int width, int height, int[] pixels) {
 

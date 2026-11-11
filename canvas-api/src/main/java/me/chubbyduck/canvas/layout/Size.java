@@ -2,7 +2,9 @@ package me.chubbyduck.canvas.layout;
 
 import org.jspecify.annotations.NullMarked;
 
-/** A width and height in canvas pixels. */
+/**
+ * A width and height in canvas pixels.
+ */
 @NullMarked
 public record Size(int width, int height) {
 

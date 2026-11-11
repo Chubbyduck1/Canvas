@@ -14,7 +14,9 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 
-/** The track of a glyph {@link Slider}: a sunken well, an accent fill up to the value, and a thumb. */
+/**
+ * The track of a glyph {@link Slider}: a sunken well, an accent fill up to the value, and a thumb.
+ */
 @NullMarked
 public class SliderTrack extends Node {
 

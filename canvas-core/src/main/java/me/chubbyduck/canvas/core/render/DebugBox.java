@@ -8,7 +8,9 @@ import me.chubbyduck.canvas.layout.Insets;
 import me.chubbyduck.canvas.node.Node;
 import net.kyori.adventure.key.Key;
 
-/** Textures for the debug overlay: outlines for layout boxes and translucent fills for click areas. */
+/**
+ * Textures for the debug overlay: outlines for layout boxes and translucent fills for click areas.
+ */
 public class DebugBox extends Node {
 
     public static NineSlice boxSkin;

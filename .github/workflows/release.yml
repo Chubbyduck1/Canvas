@@ -3,7 +3,7 @@ name: Release
 # Publishing a GitHub release (tag v1.2.3) builds Canvas.jar at that version and attaches it.
 on:
   release:
-    types: [published]
+    types: [ published ]
 
 permissions:
   contents: write

@@ -5,7 +5,9 @@ import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Detects Bedrock players through Floodgate, if it is installed (no compile-time dependency). */
+/**
+ * Detects Bedrock players through Floodgate, if it is installed (no compile-time dependency).
+ */
 @NullMarked
 final class BedrockDetector {
 

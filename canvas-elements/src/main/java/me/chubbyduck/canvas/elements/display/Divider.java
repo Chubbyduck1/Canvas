@@ -12,7 +12,9 @@ import me.chubbyduck.canvas.paint.PaintContext;
 import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;
 
-/** A one-pixel horizontal rule that fills the available width. */
+/**
+ * A one-pixel horizontal rule that fills the available width.
+ */
 @NullMarked
 public class Divider extends Node {
 

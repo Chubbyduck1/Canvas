@@ -119,7 +119,9 @@ public class Flex extends Node {
         }
     }
 
-    /** Sizes of a row's children for measuring. */
+    /**
+     * Sizes of a row's children for measuring.
+     */
     private List<Size> rowSizes(final List<LayoutContext.Child> line, final int space) {
         final List<Size> sizes = new ArrayList<>(line.size());
         if (space == Integer.MAX_VALUE) {
@@ -376,7 +378,9 @@ public class Flex extends Node {
             return this;
         }
 
-        /** Lets a row break onto several lines at the available width. */
+        /**
+         * Lets a row break onto several lines at the available width.
+         */
         public Builder wrap(final boolean wrap) {
             this.wrap = wrap;
             return this;
@@ -417,7 +421,9 @@ public class Flex extends Node {
             return this;
         }
 
-        /** How much of its parent flex container's free space this container takes. */
+        /**
+         * How much of its parent flex container's free space this container takes.
+         */
         public Builder grow(final float grow) {
             this.grow = grow;
             return this;

@@ -11,7 +11,9 @@ import me.chubbyduck.canvas.state.State;
 import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 
-/** Native dialog inputs: a real text box, checkbox, slider or option button. */
+/**
+ * Native dialog inputs: a real text box, checkbox, slider or option button.
+ */
 @NullMarked
 public class NativeInput extends Node {
 
@@ -21,7 +23,9 @@ public class NativeInput extends Node {
         this.input = input;
     }
 
-    /** A text box. */
+    /**
+     * A text box.
+     */
     public static NativeInput text(final String label, final State<String> state) {
         return text(label, state.get(), 256, state::set);
     }
@@ -38,7 +42,9 @@ public class NativeInput extends Node {
         return new NativeInput(new DialogInput.Text(label, true, initial, maxLength, 200, onValue));
     }
 
-    /** A checkbox (drawn as a switch by the Canvas pack). */
+    /**
+     * A checkbox (drawn as a switch by the Canvas pack).
+     */
     public static NativeInput checkbox(final String label, final State<Boolean> state) {
         return checkbox(Component.text(label), state);
     }
@@ -47,7 +53,9 @@ public class NativeInput extends Node {
         return new NativeInput(new DialogInput.Bool(label, state.get(), state::set));
     }
 
-    /** A native slider between {@code min} and {@code max}. */
+    /**
+     * A native slider between {@code min} and {@code max}.
+     */
     public static NativeInput slider(final String label, final int min, final int max, final int step, final State<Integer> state) {
         return slider(Component.text(label), min, max, step, state);
     }
@@ -65,14 +73,18 @@ public class NativeInput extends Node {
         ));
     }
 
-    /** A cycling option button. */
+    /**
+     * A cycling option button.
+     */
     public static NativeInput options(final String label, final Map<String, String> options, final State<String> state) {
         final Map<String, Component> display = new java.util.LinkedHashMap<>();
         options.forEach((id, text) -> display.put(id, Component.text(text)));
         return options(Component.text(label), display, state);
     }
 
-    /** A cycling option button with styled label and option text. */
+    /**
+     * A cycling option button with styled label and option text.
+     */
     public static NativeInput options(final Component label, final Map<String, ? extends Component> options, final State<String> state) {
         final List<DialogInput.Options.Option> entries = options.entrySet().stream()
             .map(entry -> new DialogInput.Options.Option(entry.getKey(), entry.getValue()))

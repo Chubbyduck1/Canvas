@@ -5,7 +5,9 @@ import me.chubbyduck.canvas.state.State;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** A handle to one state slot. */
+/**
+ * A handle to one state slot.
+ */
 @NullMarked
 class StateImpl<T extends @Nullable Object> implements State<T> {
 
