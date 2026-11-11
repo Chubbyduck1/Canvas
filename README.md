@@ -30,6 +30,8 @@ public class SettingsScreen implements NodeLike {
 Canvas is published through [JitPack](https://jitpack.io/#Chubbyduck1/Canvas). Use a release tag (or a commit hash)
 as the version:
 
+[![](https://jitpack.io/v/Chubbyduck1/Canvas.svg)](https://jitpack.io/#Chubbyduck1/Canvas)
+
 ```kotlin
 repositories {
     maven("https://jitpack.io")
