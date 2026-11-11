@@ -1,0 +1,21 @@
+.gradle/
+build/
+*/build/
+canvas-kitchensink/run/
+.idea/
+*.iml
+out/
+run/
+*.log
+logs/
+*.hprof
+
+# Editors and OS files
+.vscode/
+.classpath
+.project
+.settings/
+bin/
+.DS_Store
+Thumbs.db
+output/

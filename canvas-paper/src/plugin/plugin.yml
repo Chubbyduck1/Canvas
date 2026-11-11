@@ -1,0 +1,6 @@
+name: Canvas
+version: '${version}'
+main: me.chubbyduck.canvas.paper.CanvasPlugin
+api-version: '26.3'
+description: Dialog UIs drawn with resource pack glyphs.
+website: https://github.com/Chubbyduck1/Canvas

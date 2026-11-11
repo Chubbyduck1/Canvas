@@ -1,0 +1,17 @@
+name: Feature request
+description: A new element, layout option or API.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What you're trying to build
+      description: The screen or behaviour you need, and what's missing today.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Suggested API
+      description: How you'd like to write it, if you have an idea.
+      render: java

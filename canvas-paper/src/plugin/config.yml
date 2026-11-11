@@ -1,0 +1,6 @@
+# false: every player gets the glyph UI (serve pack.zip yourself, e.g. as the server resource pack).
+# true: players get plain dialogs until a resource pack reports it loaded.
+require-pack: false
+
+# Anonymous usage statistics on bstats.org.
+metrics: true

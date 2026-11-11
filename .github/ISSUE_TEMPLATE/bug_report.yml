@@ -1,0 +1,44 @@
+name: Bug report
+description: Something renders wrong, breaks or errors.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you saw. Screenshots help a lot.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: The smallest node tree or steps that show it.
+      render: java
+  - type: input
+    id: canvas
+    attributes:
+      label: Canvas version
+      placeholder: v0.1.0
+    validations:
+      required: true
+  - type: input
+    id: server
+    attributes:
+      label: Server and client version
+      placeholder: Paper 26.3 build 248, client 26.3
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: How Canvas is installed
+      options:
+        - Canvas plugin
+        - Shaded into my plugin
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Server log around the error, if any.
+      render: text

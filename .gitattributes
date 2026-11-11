@@ -1,0 +1,15 @@
+* text=auto eol=lf
+
+*.bat text eol=crlf
+
+*.jar binary
+*.png binary
+*.der binary
+*.dat binary
+*.mca binary
+
+*.java diff=java
+*.java.peb diff=java
+*.kt diff=kotlin
+*.kts diff=kotlin
+*.md diff=markdown

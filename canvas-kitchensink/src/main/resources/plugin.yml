@@ -1,0 +1,6 @@
+name: CanvasKitchensink
+version: '${version}'
+main: me.chubbyduck.canvas.kitchensink.KitchensinkPlugin
+api-version: '26.3'
+description: Example plugin for Canvas. /ks opens it.
+depend: [Canvas]
