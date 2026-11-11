@@ -7,7 +7,9 @@ import me.chubbyduck.canvas.asset.Theme;
 import me.chubbyduck.canvas.layout.Insets;
 import org.jspecify.annotations.NullMarked;
 
-/** OreUI-style painters, all generated from theme tokens. */
+/**
+ * OreUI-style painters, all generated from theme tokens.
+ */
 @NullMarked
 public final class OreSkins {
 
@@ -20,7 +22,9 @@ public final class OreSkins {
     private OreSkins() {
     }
 
-    /** A raised button. */
+    /**
+     * A raised button.
+     */
     public static NineSlicePainter button(final Variant variant) {
         return theme -> {
             final Theme.Palette palette = theme.palette();
@@ -60,7 +64,9 @@ public final class OreSkins {
         return faceTop + Math.max(0, faceHeight - contentHeight) / 2;
     }
 
-    /** A card body: outline, light top/left edge, darker right edge, rule line and 2px lip at the bottom. */
+    /**
+     * A card body: outline, light top/left edge, darker right edge, rule line and 2px lip at the bottom.
+     */
     public static NineSlicePainter panel() {
         return theme -> {
             final Theme.Palette palette = theme.palette();
@@ -97,7 +103,9 @@ public final class OreSkins {
         };
     }
 
-    /** A sunken well: dark inner shadow top/left. */
+    /**
+     * A sunken well: dark inner shadow top/left.
+     */
     public static NineSlicePainter sunken() {
         return theme -> {
             final Theme.Palette palette = theme.palette();
@@ -110,7 +118,9 @@ public final class OreSkins {
         };
     }
 
-    /** A sunken well filled with the accent color (the filled part of a slider track). */
+    /**
+     * A sunken well filled with the accent color (the filled part of a slider track).
+     */
     public static NineSlicePainter sunkenAccent() {
         return theme -> {
             final Theme.Palette palette = theme.palette();
@@ -123,7 +133,9 @@ public final class OreSkins {
         };
     }
 
-    /** A one-pixel rule in the card rule color. */
+    /**
+     * A one-pixel rule in the card rule color.
+     */
     public static NineSlicePainter rule() {
         return theme -> new NineSliceImage(
             PixelCanvas.canvas(3, 3).fill(theme.palette().rule()).image(),
@@ -131,7 +143,9 @@ public final class OreSkins {
         );
     }
 
-    /** Slider thumb, 6x14: a small button. */
+    /**
+     * Slider thumb, 6x14: a small button.
+     */
     public static Painter sliderThumb() {
         return theme -> {
             final Theme.Palette palette = theme.palette();
@@ -146,7 +160,9 @@ public final class OreSkins {
         };
     }
 
-    /** Toggle switch, 28x14: a sunken (off) or accent (on) track with a button-styled knob. */
+    /**
+     * Toggle switch, 28x14: a sunken (off) or accent (on) track with a button-styled knob.
+     */
     public static Painter toggle(final boolean on) {
         return theme -> {
             final Theme.Palette palette = theme.palette();
@@ -177,7 +193,9 @@ public final class OreSkins {
         };
     }
 
-    /** A pixel arrow, 7x7. */
+    /**
+     * A pixel arrow, 7x7.
+     */
     public static Painter arrow(final boolean left) {
         return theme -> {
             final int color = theme.palette().text();

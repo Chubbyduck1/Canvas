@@ -13,7 +13,9 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jspecify.annotations.NullMarked;
 
-/** The Canvas test plugin: every element and feature on its own page. */
+/**
+ * The Canvas test plugin: every element and feature on its own page.
+ */
 @NullMarked
 public class KitchensinkPlugin extends JavaPlugin implements Listener {
 

@@ -12,7 +12,9 @@ import me.chubbyduck.canvas.state.Scope;
 import me.chubbyduck.canvas.state.State;
 import org.jspecify.annotations.NullMarked;
 
-/** Shows the kitchensink's own primitive, {@link Gauge}, which registers its textures itself. */
+/**
+ * Shows the kitchensink's own primitive, {@link Gauge}, which registers its textures itself.
+ */
 @NullMarked
 public class GaugePage implements NodeLike {
 

@@ -6,7 +6,9 @@ import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jspecify.annotations.NullMarked;
 
-/** The standalone Canvas plugin; dependents register nodes with {@code CanvasRuntime.get().register(...)}. */
+/**
+ * The standalone Canvas plugin; dependents register nodes with {@code CanvasRuntime.get().register(...)}.
+ */
 @NullMarked
 public class CanvasPlugin extends JavaPlugin {
 

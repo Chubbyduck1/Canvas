@@ -13,7 +13,9 @@ import me.chubbyduck.canvas.node.NodeLike;
 import me.chubbyduck.canvas.state.Scope;
 import org.jspecify.annotations.NullMarked;
 
-/** Common page frame: a back arrow to the index, the page title, a one-line note, then content. */
+/**
+ * Common page frame: a back arrow to the index, the page title, a one-line note, then content.
+ */
 @NullMarked
 public final class PageChrome {
 

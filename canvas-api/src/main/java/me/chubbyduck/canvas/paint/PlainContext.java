@@ -5,11 +5,15 @@ import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Given to {@link Node#plain}, which renders a node for players without the resource pack (or on BedrockDetector). */
+/**
+ * Given to {@link Node#plain}, which renders a node for players without the resource pack (or on BedrockDetector).
+ */
 @NullMarked
 public interface PlainContext {
 
-    /** Renders this node's children in order. */
+    /**
+     * Renders this node's children in order.
+     */
     void renderChildren();
 
     void text(Component text);

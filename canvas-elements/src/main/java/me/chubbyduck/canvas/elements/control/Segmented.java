@@ -1,6 +1,7 @@
 package me.chubbyduck.canvas.elements.control;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -15,7 +16,9 @@ import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** A row of buttons where one is selected, like "On / Minimal / Off". */
+/**
+ * A row of buttons where one is selected, like "On / Minimal / Off".
+ */
 @NullMarked
 public class Segmented<T> extends Composite {
 
@@ -63,9 +66,7 @@ public class Segmented<T> extends Composite {
 
         @SafeVarargs
         public final Builder<T> options(final T... options) {
-            for (final T value : options) {
-                this.options.add(value);
-            }
+            this.options.addAll(Arrays.asList(options));
             return this;
         }
 
@@ -79,7 +80,9 @@ public class Segmented<T> extends Composite {
             return this;
         }
 
-        /** Styled labels. */
+        /**
+         * Styled labels.
+         */
         public Builder<T> labelComponent(final Function<? super T, ? extends Component> label) {
             this.label = label;
             return this;

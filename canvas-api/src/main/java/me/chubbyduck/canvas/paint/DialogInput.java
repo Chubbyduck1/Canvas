@@ -5,13 +5,17 @@ import java.util.function.Consumer;
 import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 
-/** A native dialog input. */
+/**
+ * A native dialog input.
+ */
 @NullMarked
 public sealed interface DialogInput {
 
     Component label();
 
-    /** A text box. */
+    /**
+     * A text box.
+     */
     record Text(
         Component label,
         boolean labelVisible,
@@ -26,11 +30,15 @@ public sealed interface DialogInput {
         }
     }
 
-    /** A checkbox (restyled as a toggle by the pack). */
+    /**
+     * A checkbox (restyled as a toggle by the pack).
+     */
     record Bool(Component label, boolean initial, Consumer<Boolean> onValue) implements DialogInput {
     }
 
-    /** A slider. */
+    /**
+     * A slider.
+     */
     record Range(
         Component label,
         String labelFormat,
@@ -46,7 +54,9 @@ public sealed interface DialogInput {
         }
     }
 
-    /** A cycling option button. */
+    /**
+     * A cycling option button.
+     */
     record Options(
         Component label,
         boolean labelVisible,

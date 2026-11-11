@@ -18,7 +18,9 @@ import me.chubbyduck.canvas.state.Scope;
 import me.chubbyduck.canvas.state.State;
 import org.jspecify.annotations.NullMarked;
 
-/** Lists every page, grouped. */
+/**
+ * Lists every page, grouped.
+ */
 @NullMarked
 public class IndexPage implements NodeLike {
 

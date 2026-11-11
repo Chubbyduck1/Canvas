@@ -23,7 +23,9 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class Text extends Node {
 
-    /** Distance between lines. */
+    /**
+     * Distance between lines.
+     */
     public static final int LINE_HEIGHT = 9;
 
     private final Component content;
@@ -45,7 +47,9 @@ public class Text extends Node {
         return new Text(Component.text(text));
     }
 
-    /** Bold text in the primary color. */
+    /**
+     * Bold text in the primary color.
+     */
     public static Text title(final String text) {
         return of(text).bold(true);
     }
@@ -54,7 +58,9 @@ public class Text extends Node {
         return of(content).bold(true);
     }
 
-    /** Text in the theme's secondary color. */
+    /**
+     * Text in the theme's secondary color.
+     */
     public static Text muted(final String text) {
         return of(text).tone(Tone.MUTED);
     }
@@ -63,31 +69,41 @@ public class Text extends Node {
         return of(content).tone(Tone.MUTED);
     }
 
-    /** Default color for parts of the text that don't set one. */
+    /**
+     * Default color for parts of the text that don't set one.
+     */
     public Text color(final int rgb) {
         this.color = rgb;
         return this;
     }
 
-    /** Default theme color for parts of the text that don't set one. */
+    /**
+     * Default theme color for parts of the text that don't set one.
+     */
     public Text tone(final Tone tone) {
         this.tone = tone;
         return this;
     }
 
-    /** Default boldness for parts of the text that don't set it. */
+    /**
+     * Default boldness for parts of the text that don't set it.
+     */
     public Text bold(final boolean bold) {
         this.bold = bold;
         return this;
     }
 
-    /** Caps the line width. */
+    /**
+     * Caps the line width.
+     */
     public Text maxWidth(final int maxWidth) {
         this.maxWidth = maxWidth;
         return this;
     }
 
-    /** Horizontal alignment of each line within the node's width. */
+    /**
+     * Horizontal alignment of each line within the node's width.
+     */
     public Text align(final Align align) {
         this.align = align;
         return this;
@@ -97,7 +113,9 @@ public class Text extends Node {
         return this.content;
     }
 
-    /** The content with this node's defaults applied underneath it. */
+    /**
+     * The content with this node's defaults applied underneath it.
+     */
     private Component styled(final int themeColor) {
         final Style defaults = Style.style()
             .color(TextColor.color(this.color != null ? this.color : themeColor))
@@ -163,7 +181,9 @@ public class Text extends Node {
         context.text(line);
     }
 
-    /** Semantic text colors taken from the theme. */
+    /**
+     * Semantic text colors taken from the theme.
+     */
     public enum Tone {
         NORMAL,
         MUTED,

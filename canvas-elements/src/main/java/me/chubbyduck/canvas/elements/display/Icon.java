@@ -8,7 +8,9 @@ import me.chubbyduck.canvas.node.Node;
 import me.chubbyduck.canvas.paint.PaintContext;
 import org.jspecify.annotations.NullMarked;
 
-/** Draws a registered sprite at its natural size, centered in the node's rectangle. */
+/**
+ * Draws a registered sprite at its natural size, centered in the node's rectangle.
+ */
 @NullMarked
 public class Icon extends Node {
 

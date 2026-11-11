@@ -14,7 +14,9 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Bridge the Canvas runtime uses to call {@link Node}'s protected lifecycle methods. */
+/**
+ * Bridge the Canvas runtime uses to call {@link Node}'s protected lifecycle methods.
+ */
 @NullMarked
 @ApiStatus.Internal
 public final class NodeInternals {
@@ -70,7 +72,9 @@ public final class NodeInternals {
         return null;
     }
 
-    /** Creates a throwaway instance through the class's no-arg constructor (any visibility). */
+    /**
+     * Creates a throwaway instance through the class's no-arg constructor (any visibility).
+     */
     public static <N extends Node> N instantiate(final Class<N> type) {
         try {
             final Constructor<N> constructor = type.getDeclaredConstructor();

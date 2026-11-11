@@ -4,7 +4,9 @@ import me.chubbyduck.canvas.layout.Direction;
 import me.chubbyduck.canvas.node.NodeLike;
 import org.jspecify.annotations.NullMarked;
 
-/** A vertical {@link Flex}. */
+/**
+ * A vertical {@link Flex}.
+ */
 @NullMarked
 public final class Column {
 

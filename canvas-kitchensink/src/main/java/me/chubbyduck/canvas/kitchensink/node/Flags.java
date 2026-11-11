@@ -11,7 +11,9 @@ import me.chubbyduck.canvas.node.Node;
 import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;
 
-/** 11x8 pixel-art flags for the language dropdown. */
+/**
+ * 11x8 pixel-art flags for the language dropdown.
+ */
 @NullMarked
 public class Flags extends Node {
 
@@ -96,7 +98,9 @@ public class Flags extends Node {
         }
     }
 
-    /** The languages in the kitchensink's language dropdown. */
+    /**
+     * The languages in the kitchensink's language dropdown.
+     */
     public enum Language {
         AUTO("Automatyczny"),
         EN_US("English (US)"),

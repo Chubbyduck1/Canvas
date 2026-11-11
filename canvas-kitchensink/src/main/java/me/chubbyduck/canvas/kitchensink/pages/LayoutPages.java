@@ -20,7 +20,9 @@ import me.chubbyduck.canvas.state.Scope;
 import me.chubbyduck.canvas.state.State;
 import org.jspecify.annotations.NullMarked;
 
-/** Pages for the containers: absolute positioning, flex, stack, nesting and offsets. */
+/**
+ * Pages for the containers: absolute positioning, flex, stack, nesting and offsets.
+ */
 @NullMarked
 public final class LayoutPages {
 
@@ -146,7 +148,9 @@ public final class LayoutPages {
         }
     }
 
-    /** The same panel built twice: absolutely and with flex. */
+    /**
+     * The same panel built twice: absolutely and with flex.
+     */
     public static class AbsoluteVsFlexPage implements NodeLike {
 
         public static Node absoluteVersion() {

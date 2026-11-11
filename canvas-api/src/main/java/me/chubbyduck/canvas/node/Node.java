@@ -14,7 +14,9 @@ import me.chubbyduck.canvas.state.Scope;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Base class of every built-in primitive: drawing widgets and containers. */
+/**
+ * Base class of every built-in primitive: drawing widgets and containers.
+ */
 @NullMarked
 public abstract class Node implements NodeLike {
 
@@ -41,29 +43,41 @@ public abstract class Node implements NodeLike {
         return this.key;
     }
 
-    /** Child elements of this node, in paint order. */
+    /**
+     * Child elements of this node, in paint order.
+     */
     public List<? extends NodeLike> children() {
         return List.of();
     }
 
-    /** Declares this node class's textures. */
+    /**
+     * Declares this node class's textures.
+     */
     protected void register(final AssetRegistrar assets) {
     }
 
-    /** Intrinsic ("hug") size of this node. */
+    /**
+     * Intrinsic ("hug") size of this node.
+     */
     protected Size measure(final LayoutContext context) {
         return Size.ZERO;
     }
 
-    /** Places children inside the given rectangle. */
+    /**
+     * Places children inside the given rectangle.
+     */
     protected void arrange(final Rect rect, final LayoutContext context) {
     }
 
-    /** Emits draw operations, hit regions, native inputs and footer buttons for this node. */
+    /**
+     * Emits draw operations, hit regions, native inputs and footer buttons for this node.
+     */
     protected void paint(final PaintContext context) {
     }
 
-    /** Renders this node for players without the resource pack. */
+    /**
+     * Renders this node for players without the resource pack.
+     */
     protected void plain(final PlainContext context) {
         context.renderChildren();
     }
@@ -95,13 +109,17 @@ public abstract class Node implements NodeLike {
         return this.width(width).height(height);
     }
 
-    /** The narrowest this node may be. */
+    /**
+     * The narrowest this node may be.
+     */
     public Node minWidth(final int pixels) {
         this.minWidth = Math.max(0, pixels);
         return this;
     }
 
-    /** The shortest this node may be. */
+    /**
+     * The shortest this node may be.
+     */
     public Node minHeight(final int pixels) {
         this.minHeight = Math.max(0, pixels);
         return this;
@@ -115,7 +133,9 @@ public abstract class Node implements NodeLike {
         return this.minHeight;
     }
 
-    /** Fills the available space on both axes. */
+    /**
+     * Fills the available space on both axes.
+     */
     public Node fill() {
         return this.width(Length.FILL).height(Length.FILL);
     }
@@ -148,14 +168,18 @@ public abstract class Node implements NodeLike {
         return this;
     }
 
-    /** Shifts this node visually without affecting its siblings' layout. */
+    /**
+     * Shifts this node visually without affecting its siblings' layout.
+     */
     public Node offset(final int offsetX, final int offsetY) {
         this.offsetX = offsetX;
         this.offsetY = offsetY;
         return this;
     }
 
-    /** Paint order relative to siblings; higher draws on top. */
+    /**
+     * Paint order relative to siblings; higher draws on top.
+     */
     public Node z(final int z) {
         this.z = z;
         return this;

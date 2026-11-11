@@ -9,7 +9,9 @@ import net.kyori.adventure.audience.Audience;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Scope of one custom element during one render. */
+/**
+ * Scope of one custom element during one render.
+ */
 @NullMarked
 public class ScopeImpl implements Scope {
 
@@ -65,7 +67,9 @@ public class ScopeImpl implements Scope {
         return this.session;
     }
 
-    /** Called after {@code getNode} returns; checks the hook count matches previous renders. */
+    /**
+     * Called after {@code getNode} returns; checks the hook count matches previous renders.
+     */
     public void finish() {
         this.finished = true;
         if (this.cells.expectedHooks < 0) {

@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import me.chubbyduck.canvas.Canvas;
 import me.chubbyduck.canvas.asset.Theme;
+import me.chubbyduck.canvas.core.atlas.TextMetrics;
 import me.chubbyduck.canvas.core.dialog.GlyphCompiler;
 import me.chubbyduck.canvas.core.dialog.InputBinding;
 import me.chubbyduck.canvas.core.dialog.PlainCompiler;
@@ -24,10 +25,13 @@ import me.chubbyduck.canvas.session.Session;
 import me.chubbyduck.canvas.spi.CanvasPlatform;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.identity.Identity;
+import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Owns every open session and all retained state. */
+/**
+ * Owns every open session and all retained state.
+ */
 @NullMarked
 public class SessionManager implements CanvasPlatform {
 
@@ -98,6 +102,11 @@ public class SessionManager implements CanvasPlatform {
         return viewer.get(Identity.UUID).map(this.sessions::get).filter(SessionImpl::isOpen).map(Session.class::cast);
     }
 
+    @Override
+    public void registerFontWidth(final @Nullable Key font, final int codepoint, final int width) {
+        TextMetrics.registerWidth(font, codepoint, width);
+    }
+
     private StateStore store(final Canvas canvas, final UUID id, final boolean fresh) {
         synchronized (this.retained) {
             final Map<UUID, StateStore> stores = this.retained.computeIfAbsent(canvas, unused -> new ConcurrentHashMap<>());
@@ -108,7 +117,9 @@ public class SessionManager implements CanvasPlatform {
         }
     }
 
-    /** Routes a click from a dialog. */
+    /**
+     * Routes a click from a dialog.
+     */
     public void handleClick(
         final UUID player,
         final String sessionId,
@@ -123,7 +134,9 @@ public class SessionManager implements CanvasPlatform {
         session.click(nonce, action, inputs);
     }
 
-    /** The player left: closes their session and drops all state retained for them. */
+    /**
+     * The player left: closes their session and drops all state retained for them.
+     */
     public void quit(final UUID player) {
         final SessionImpl session = this.sessions.get(player);
         if (session != null) {
@@ -137,7 +150,9 @@ public class SessionManager implements CanvasPlatform {
         this.debug.remove(player);
     }
 
-    /** Something else (an inventory, another plugin's dialog) replaced the player's canvas. */
+    /**
+     * Something else (an inventory, another plugin's dialog) replaced the player's canvas.
+     */
     public void external(final UUID player) {
         final SessionImpl session = this.sessions.get(player);
         if (session != null) {
@@ -161,7 +176,9 @@ public class SessionManager implements CanvasPlatform {
         return this.debug.contains(player);
     }
 
-    /** Re-renders every open session, e.g. after the pack was rebuilt. */
+    /**
+     * Re-renders every open session, e.g. after the pack was rebuilt.
+     */
     public void rerenderAll() {
         for (final SessionImpl session : List.copyOf(this.sessions.values())) {
             this.platform.schedule(session.viewer(), () -> session.render(true));

@@ -20,7 +20,9 @@ import org.bukkit.event.server.PluginDisableEvent;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Routes dialog clicks, tracks pack status, and cleans up sessions. */
+/**
+ * Routes dialog clicks, tracks pack status, and cleans up sessions.
+ */
 @NullMarked
 final class CanvasListener implements Listener {
 

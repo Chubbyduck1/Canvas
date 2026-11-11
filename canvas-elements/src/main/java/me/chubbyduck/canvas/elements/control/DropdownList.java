@@ -6,17 +6,23 @@ import me.chubbyduck.canvas.node.Node;
 import me.chubbyduck.canvas.paint.PaintContext;
 import org.jspecify.annotations.NullMarked;
 
-/** The open option list of a {@link Dropdown}. */
+/**
+ * The open option list of a {@link Dropdown}.
+ */
 @NullMarked
 public class DropdownList extends Node {
 
-    /** Click areas are whole 9px text rows, so rows are two text rows tall and start on a row. */
+    /**
+     * Click areas are whole 9px text rows, so rows are two text rows tall and start on a row.
+     */
     public static final int ROW_GRID = 9;
     private static final int ROW_HEIGHT = 2 * ROW_GRID;
 
     private final List<DropdownNode.Option> options;
     private final Runnable close;
-    /** Top edge of the dropdown's button, set while laying out. */
+    /**
+     * Top edge of the dropdown's button, set while laying out.
+     */
     public int anchorTop;
 
     DropdownList(final List<DropdownNode.Option> options, final Runnable close) {

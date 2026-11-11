@@ -8,7 +8,9 @@ import net.kyori.adventure.audience.Audience;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Passed to {@link NodeLike#getNode(Scope)}. */
+/**
+ * Passed to {@link NodeLike#getNode(Scope)}.
+ */
 @NullMarked
 public interface Scope {
 

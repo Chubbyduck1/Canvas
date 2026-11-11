@@ -4,7 +4,9 @@ import me.chubbyduck.canvas.Canvas;
 import net.kyori.adventure.audience.Audience;
 import org.jspecify.annotations.NullMarked;
 
-/** One player's open view of a {@link Canvas}. */
+/**
+ * One player's open view of a {@link Canvas}.
+ */
 @NullMarked
 public interface Session {
 
@@ -16,7 +18,9 @@ public interface Session {
 
     void close();
 
-    /** Forces a render and re-send, even if no state changed. */
+    /**
+     * Forces a render and re-send, even if no state changed.
+     */
     void updateCanvas();
 
 }

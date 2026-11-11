@@ -21,7 +21,9 @@ import net.kyori.adventure.audience.Audience;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** One player's open canvas. */
+/**
+ * One player's open canvas.
+ */
 @NullMarked
 class SessionImpl implements Session {
 
@@ -113,7 +115,9 @@ class SessionImpl implements Session {
         }
     }
 
-    /** Renders and sends the dialog if it changed (or always, when forced). */
+    /**
+     * Renders and sends the dialog if it changed (or always, when forced).
+     */
     synchronized void render(final boolean force) {
         if (!this.open) {
             return;

@@ -13,7 +13,9 @@ import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** ◀ value ▶: arrow buttons that step an integer between a minimum and maximum. */
+/**
+ * ◀ value ▶: arrow buttons that step an integer between a minimum and maximum.
+ */
 @NullMarked
 public class Stepper extends Composite {
 
@@ -84,7 +86,9 @@ public class Stepper extends Composite {
             return this;
         }
 
-        /** Styled value text. */
+        /**
+         * Styled value text.
+         */
         public Builder formatComponent(final IntFunction<? extends Component> format) {
             this.format = format;
             return this;

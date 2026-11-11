@@ -12,7 +12,9 @@ import me.chubbyduck.canvas.node.Node;
 import me.chubbyduck.canvas.node.NodeLike;
 import org.jspecify.annotations.NullMarked;
 
-/** Overlays children on top of each other, each aligned within the stack. */
+/**
+ * Overlays children on top of each other, each aligned within the stack.
+ */
 @NullMarked
 public class Stack extends Node {
 

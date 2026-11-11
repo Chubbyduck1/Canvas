@@ -16,11 +16,15 @@ import me.chubbyduck.canvas.core.atlas.GlyphAtlas;
 import me.chubbyduck.canvas.pack.internal.PackAtlas;
 import org.jspecify.annotations.NullMarked;
 
-/** A built Canvas resource pack: the glyph atlas the compiler uses, and the zip players download. */
+/**
+ * A built Canvas resource pack: the glyph atlas the compiler uses, and the zip players download.
+ */
 @NullMarked
 public class CanvasPack {
 
-    /** Fixed entry timestamp (1980-01-01) so the zip, and its hash, are reproducible. */
+    /**
+     * Fixed entry timestamp (1980-01-01) so the zip, and its hash, are reproducible.
+     */
     private static final long ZIP_TIME = 315532800000L;
 
     private final PackAtlas atlas;

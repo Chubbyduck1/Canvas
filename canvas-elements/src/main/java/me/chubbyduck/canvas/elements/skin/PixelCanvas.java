@@ -3,7 +3,9 @@ package me.chubbyduck.canvas.elements.skin;
 import java.awt.image.BufferedImage;
 import org.jspecify.annotations.NullMarked;
 
-/** Pixel-art drawing primitives for painters. */
+/**
+ * Pixel-art drawing primitives for painters.
+ */
 @NullMarked
 public final class PixelCanvas {
 
@@ -30,7 +32,9 @@ public final class PixelCanvas {
         return this.fill(0, 0, this.image.getWidth(), this.image.getHeight(), argb);
     }
 
-    /** A one-pixel frame around the given rectangle's inside edge. */
+    /**
+     * A one-pixel frame around the given rectangle's inside edge.
+     */
     public PixelCanvas outline(final int x, final int y, final int width, final int height, final int argb) {
         this.fill(x, y, width, 1, argb);
         this.fill(x, y + height - 1, width, 1, argb);
@@ -50,7 +54,9 @@ public final class PixelCanvas {
         return this;
     }
 
-    /** Draws a shape from rows of characters: {@code #} is filled, anything else is transparent. */
+    /**
+     * Draws a shape from rows of characters: {@code #} is filled, anything else is transparent.
+     */
     public PixelCanvas shape(final int x, final int y, final int argb, final String... rows) {
         for (int row = 0; row < rows.length; row++) {
             for (int column = 0; column < rows[row].length(); column++) {

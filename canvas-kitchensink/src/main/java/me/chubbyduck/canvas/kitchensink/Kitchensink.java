@@ -25,11 +25,15 @@ import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** The page registry and the canvases built from it. */
+/**
+ * The page registry and the canvases built from it.
+ */
 @NullMarked
 public final class Kitchensink {
 
-    /** Width every page canvas uses, in GUI pixels. */
+    /**
+     * Width every page canvas uses, in GUI pixels.
+     */
     public static final int WIDTH = 330;
 
     private static final Map<String, Canvas> CANVASES = new ConcurrentHashMap<>();
@@ -92,17 +96,23 @@ public final class Kitchensink {
         return hooks;
     }
 
-    /** The index canvas. */
+    /**
+     * The index canvas.
+     */
     public static Canvas index() {
         return CANVASES.computeIfAbsent("index", id -> decorate(new Canvas(new IndexPage()), "Kitchensink"));
     }
 
-    /** The canvas for a page. */
+    /**
+     * The canvas for a page.
+     */
     public static Canvas canvas(final Page page) {
         return CANVASES.computeIfAbsent(page.id(), id -> decorate(new Canvas(page.factory().get()), page.title()));
     }
 
-    /** Adds the kitchensink's title, width and close tracking to a canvas. */
+    /**
+     * Adds the kitchensink's title, width and close tracking to a canvas.
+     */
     public static Canvas decorate(final Canvas canvas, final String title) {
         return canvas
             .title(Component.text("Canvas Kitchensink: " + title))
@@ -128,7 +138,9 @@ public final class Kitchensink {
         LAST_REASON.remove(player);
     }
 
-    /** A kitchensink page. */
+    /**
+     * A kitchensink page.
+     */
     public record Page(String id, String title, String group, Supplier<NodeLike> factory) {
     }
 }

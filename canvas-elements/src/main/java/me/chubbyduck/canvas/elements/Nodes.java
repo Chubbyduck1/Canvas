@@ -26,7 +26,9 @@ import me.chubbyduck.canvas.elements.layout.Stack;
 import me.chubbyduck.canvas.node.Node;
 import org.jspecify.annotations.NullMarked;
 
-/** The built-in node classes, for {@code CanvasRuntime.bootstrap(plugin).register(Nodes.defaults())}. */
+/**
+ * The built-in node classes, for {@code CanvasRuntime.bootstrap(plugin).register(Nodes.defaults())}.
+ */
 @NullMarked
 public final class Nodes {
 

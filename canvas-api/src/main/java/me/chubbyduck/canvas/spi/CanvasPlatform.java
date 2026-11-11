@@ -5,10 +5,13 @@ import me.chubbyduck.canvas.Canvas;
 import me.chubbyduck.canvas.session.OpenMode;
 import me.chubbyduck.canvas.session.Session;
 import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Implemented by the runtime that actually shows canvases. */
+/**
+ * Implemented by the runtime that actually shows canvases.
+ */
 @NullMarked
 public interface CanvasPlatform {
 
@@ -30,6 +33,8 @@ public interface CanvasPlatform {
     void reset(Canvas canvas, Audience viewer);
 
     Optional<Session> getCurrentSession(Audience viewer);
+
+    void registerFontWidth(final @Nullable Key font, final int codepoint, final int width);
 
     final class Holder {
 

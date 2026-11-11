@@ -17,7 +17,9 @@ import me.chubbyduck.canvas.state.State;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Shows one page at a time with ◀ n / total ▶ controls underneath. */
+/**
+ * Shows one page at a time with ◀ n / total ▶ controls underneath.
+ */
 @NullMarked
 public class Pager extends Composite {
 

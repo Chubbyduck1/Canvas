@@ -5,7 +5,9 @@ import me.chubbyduck.canvas.layout.Size;
 import me.chubbyduck.canvas.node.Node;
 import org.jspecify.annotations.NullMarked;
 
-/** Empty space: either a fixed gap, or {@link #flexible()} space that pushes flex siblings apart. */
+/**
+ * Empty space: either a fixed gap, or {@link #flexible()} space that pushes flex siblings apart.
+ */
 @NullMarked
 public class Spacer extends Node {
 
@@ -17,14 +19,18 @@ public class Spacer extends Node {
         this.height = height;
     }
 
-    /** A spacer that takes up all free space in its flex container. */
+    /**
+     * A spacer that takes up all free space in its flex container.
+     */
     public static Spacer flexible() {
         final Spacer spacer = new Spacer(0, 0);
         spacer.grow(1);
         return spacer;
     }
 
-    /** A fixed-size gap. */
+    /**
+     * A fixed-size gap.
+     */
     public static Spacer of(final int width, final int height) {
         return new Spacer(width, height);
     }

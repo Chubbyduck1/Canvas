@@ -76,9 +76,7 @@ public class CanvasRuntime {
     @SafeVarargs
     public final void register(final Class<? extends Node>... classes) {
         final List<Class<? extends Node>> list = new ArrayList<>(classes.length);
-        for (final Class<? extends Node> type : classes) {
-            list.add(type);
-        }
+        list.addAll(Arrays.asList(classes));
         this.register(list);
     }
 
@@ -220,9 +218,7 @@ public class CanvasRuntime {
 
         @SafeVarargs
         public final Builder register(final Class<? extends Node>... classes) {
-            for (final Class<? extends Node> type : classes) {
-                this.classes.add(type);
-            }
+            this.classes.addAll(Arrays.asList(classes));
             return this;
         }
 
@@ -231,7 +227,9 @@ public class CanvasRuntime {
             return this;
         }
 
-        /** Whether players only get glyph dialogs after a resource pack has loaded; off by default. */
+        /**
+         * Whether players only get glyph dialogs after a resource pack has loaded; off by default.
+         */
         public Builder requirePack(final boolean requirePack) {
             this.requirePack = requirePack;
             return this;

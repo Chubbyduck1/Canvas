@@ -20,9 +20,13 @@ public interface KitchensinkHooks {
         }
     };
 
-    /** Closes the dialog, asks the player to type in chat, then calls back on the player's thread. */
+    /**
+     * Closes the dialog, asks the player to type in chat, then calls back on the player's thread.
+     */
     void askChat(Audience viewer, String prompt, Consumer<String> answer);
 
-    /** Opens a chest inventory over the dialog (closes the canvas with reason EXTERNAL). */
+    /**
+     * Opens a chest inventory over the dialog (closes the canvas with reason EXTERNAL).
+     */
     void openInventory(Audience viewer);
 }

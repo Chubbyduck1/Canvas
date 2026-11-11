@@ -23,11 +23,15 @@ import net.kyori.adventure.text.format.TextDecoration;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** An OreUI panel: an outlined surface with an optional header strip. */
+/**
+ * An OreUI panel: an outlined surface with an optional header strip.
+ */
 @NullMarked
 public class Panel extends Node {
 
-    /** Header strip height: outline, edge, 15px face, two-tone rule. */
+    /**
+     * Header strip height: outline, edge, 15px face, two-tone rule.
+     */
     private static final int HEADER_HEIGHT = 20;
     @SuppressWarnings("NullAway.Init") // set by register() at pack build
     private static NineSlice bodySkin;
@@ -125,7 +129,9 @@ public class Panel extends Node {
             return this;
         }
 
-        /** A styled header title. */
+        /**
+         * A styled header title.
+         */
         public Builder title(final @Nullable Component title) {
             this.title = title;
             return this;

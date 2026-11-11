@@ -10,11 +10,15 @@ import me.chubbyduck.canvas.core.atlas.GlyphAtlas;
 import me.chubbyduck.canvas.pack.PackOptions;
 import org.jspecify.annotations.NullMarked;
 
-/** Turns glyph sheets into resource pack files: textures, fonts, pack.mcmeta and shader overlays. */
+/**
+ * Turns glyph sheets into resource pack files: textures, fonts, pack.mcmeta and shader overlays.
+ */
 @NullMarked
 public final class PackWriter {
 
-    /** The vanilla default font's ASCII sheet, reused (not copied) by the text fonts. */
+    /**
+     * The vanilla default font's ASCII sheet, reused (not copied) by the text fonts.
+     */
     private static final String VANILLA_ASCII = "minecraft:font/ascii.png";
     private static final String EMPTY_ROW = "\u0000".repeat(16);
     private static final List<String> ASCII_ROWS = List.of(
@@ -35,7 +39,9 @@ public final class PackWriter {
         EMPTY_ROW,
         EMPTY_ROW
     );
-    /** Minecraft draws a bitmap glyph's top at {@code lineTop + BASELINE - ascent}. */
+    /**
+     * Minecraft draws a bitmap glyph's top at {@code lineTop + BASELINE - ascent}.
+     */
     private static final int BASELINE = 7;
     private static final int TEXT_HEIGHT = 8;
 
@@ -49,9 +55,10 @@ public final class PackWriter {
             files.put("assets/" + PackAtlas.NAMESPACE + "/textures/" + sheet.path(), ImageTools.png(sheet.image()));
         }
 
-        final Map<String, Integer> spaces = spaceAdvances();
-        final Map<String, Integer> textSpaces = new LinkedHashMap<>(spaces);
-        textSpaces.put(" ", 4);
+        final Map<String, Number> spaces = spaceAdvances();
+        // Obfuscation chooses random glyphs from the whole font by advance. Keep cursor moves
+        // and unshifted fallback glyphs out of this pool; the compiler emits those in other fonts.
+        final Map<String, Number> textSpaces = Map.of(" ", 4);
         for (int dy = 0; dy <= GlyphAtlas.MAX_DY; dy++) {
             final StringBuilder sprites = new StringBuilder("{\"providers\":[").append(space(spaces));
             for (final GlyphTable.Sheet sheet : sheets) {
@@ -75,10 +82,10 @@ public final class PackWriter {
         return "assets/" + PackAtlas.NAMESPACE + "/font/" + name + ".json";
     }
 
-    private static String space(final Map<String, Integer> advances) {
+    private static String space(final Map<String, Number> advances) {
         final StringBuilder out = new StringBuilder("{\"type\":\"space\",\"advances\":{");
         boolean first = true;
-        for (final Map.Entry<String, Integer> advance : advances.entrySet()) {
+        for (final Map.Entry<String, Number> advance : advances.entrySet()) {
             if (!first) {
                 out.append(',');
             }
@@ -99,7 +106,9 @@ public final class PackWriter {
         return out.append("]}").toString();
     }
 
-    /** A JSON string literal; control characters are escaped, everything else is written as UTF-8. */
+    /**
+     * A JSON string literal; control characters are escaped, everything else is written as UTF-8.
+     */
     private static String quote(final String text) {
         final StringBuilder out = new StringBuilder(text.length() + 2).append('"');
         for (int i = 0; i < text.length(); i++) {
@@ -121,11 +130,15 @@ public final class PackWriter {
         return text.getBytes(StandardCharsets.UTF_8);
     }
 
-    private static Map<String, Integer> spaceAdvances() {
-        final Map<String, Integer> spaces = new LinkedHashMap<>();
+    private static Map<String, Number> spaceAdvances() {
+        final Map<String, Number> spaces = new LinkedHashMap<>();
         for (int bit = 0; bit <= PackAtlas.MAX_SPACE_BIT; bit++) {
             spaces.put(Character.toString(PackAtlas.spaceCodepoint(bit, false)), 1 << bit);
             spaces.put(Character.toString(PackAtlas.spaceCodepoint(bit, true)), -(1 << bit));
+        }
+        spaces.put(Character.toString(PackAtlas.HALF_PIXEL_SPACE), 0.5);
+        for (final int control : new int[]{0x2066, 0x2068, 0x2069}) {
+            spaces.put(Character.toString(control), 0);
         }
         return spaces;
     }

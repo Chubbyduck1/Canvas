@@ -16,7 +16,9 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 
-/** An OreUI switch drawn in the canvas, with an "On"/"Off" label to its left. */
+/**
+ * An OreUI switch drawn in the canvas, with an "On"/"Off" label to its left.
+ */
 @NullMarked
 public class Toggle extends Node {
 

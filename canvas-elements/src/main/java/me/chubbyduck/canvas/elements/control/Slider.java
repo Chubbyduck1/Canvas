@@ -15,7 +15,9 @@ import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** A glyph slider: optional value label, ◀ arrow, clickable track, ▶ arrow. */
+/**
+ * A glyph slider: optional value label, ◀ arrow, clickable track, ▶ arrow.
+ */
 @NullMarked
 public class Slider extends Composite {
 
@@ -94,13 +96,17 @@ public class Slider extends Composite {
             return this;
         }
 
-        /** Shows the value to the left of the slider, e.g. {@code value -> value + "%"}. */
+        /**
+         * Shows the value to the left of the slider, e.g. {@code value -> value + "%"}.
+         */
         public Builder format(final @Nullable IntFunction<String> format) {
             this.format = format == null ? null : value -> Component.text(format.apply(value));
             return this;
         }
 
-        /** Styled value label, e.g. a number in a color. */
+        /**
+         * Styled value label, e.g. a number in a color.
+         */
         public Builder formatComponent(final @Nullable IntFunction<? extends Component> format) {
             this.format = format;
             return this;

@@ -17,7 +17,9 @@ import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** The drawn part of a {@link Dropdown}: the closed button, plus the option list as a child while open. */
+/**
+ * The drawn part of a {@link Dropdown}: the closed button, plus the option list as a child while open.
+ */
 @NullMarked
 public class DropdownNode extends Node {
 
@@ -72,7 +74,9 @@ public class DropdownNode extends Node {
         return icon + context.textWidth(option.label());
     }
 
-    /** Draws an option's icon and label, vertically centered on a button face. */
+    /**
+     * Draws an option's icon and label, vertically centered on a button face.
+     */
     static void drawOption(final PaintContext context, final Option option, final int x, final int y, final int height, final int color) {
         int cursor = x;
         if (option.icon() != null) {
@@ -140,7 +144,9 @@ public class DropdownNode extends Node {
         }
     }
 
-    /** One option as drawn. */
+    /**
+     * One option as drawn.
+     */
     record Option(Component label, @Nullable Sprite icon, boolean selected, Runnable onSelect) {
     }
 }

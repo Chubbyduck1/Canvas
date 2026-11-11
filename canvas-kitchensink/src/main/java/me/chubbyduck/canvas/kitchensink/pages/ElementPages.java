@@ -33,9 +33,12 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.object.ObjectContents;
+import net.kyori.adventure.translation.GlobalTranslator;
 import org.jspecify.annotations.NullMarked;
 
-/** One page per built-in element, showing each of its states. */
+/**
+ * One page per built-in element, showing each of its states.
+ */
 @NullMarked
 public final class ElementPages {
 
@@ -52,14 +55,16 @@ public final class ElementPages {
 
         @Override
         public Node getNode(final Scope scope) {
-            return PageChrome.page(scope, "Text", "Default font, 9px lines. Wraps at maxWidth; non-ASCII shows as ?.",
+            return PageChrome.page(scope, "Text", "Styled Unicode text and alternate fonts. Wraps at maxWidth; native fonts snap to 9px rows.",
                 Panel.builder()
                     .title("Styles")
                     .add(Text.of("Normal text"))
                     .add(Text.title("Bold title"))
+                    .add(Text.of(Component.text("Obfuscated text").decorate(TextDecoration.OBFUSCATED)))
                     .add(Text.muted("Muted description text"))
                     .add(Text.of("Custom color").color(0x3C8527))
                     .add(Text.of("Unicode: héllo wörld"))
+                    .add(Text.of(Component.text("Example Non-Unicode: 汉字 Привет مرحبا")))
                     .build(),
                 Panel.builder()
                     .title("Adventure components")
@@ -74,7 +79,11 @@ public final class ElementPages {
                         .append(Component.text("red", NamedTextColor.DARK_RED))
                         .append(Component.text(" and "))
                         .append(Component.text("blue", NamedTextColor.DARK_BLUE))
-                        .build()))
+                        .build())
+                    )
+                    .add(Text.of(GlobalTranslator.render(Component.translatable("..."), Locale.ENGLISH)))
+                    .add(Text.of(Component.text("Obfuscated").decoration(TextDecoration.OBFUSCATED, true)))
+                    .add(Text.of(Component.text("Enchantment Language").font(Key.key(Key.MINECRAFT_NAMESPACE, "alt"))))
                     .add(Text.of(Component.text("Styles carry across wrapped lines: ")
                         .append(Component.text("this whole bold purple sentence keeps its style after the break.",
                             NamedTextColor.DARK_PURPLE, TextDecoration.BOLD))))
@@ -90,7 +99,9 @@ public final class ElementPages {
         }
     }
 
-    /** Object components: atlas sprites and player heads, drawn by the client inline with text. */
+    /**
+     * Object components: atlas sprites and player heads, drawn by the client inline with text.
+     */
     public static class ObjectsPage implements NodeLike {
 
         private static final Key GUI = Key.key("minecraft", "gui");

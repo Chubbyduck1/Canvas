@@ -10,7 +10,9 @@ import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** Native footer buttons ("Reset", "Done"...). */
+/**
+ * Native footer buttons ("Reset", "Done"...).
+ */
 @NullMarked
 public class ActionBar extends Node {
 

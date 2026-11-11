@@ -11,7 +11,9 @@ import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** A rendered dialog, ready to show. */
+/**
+ * A rendered dialog, ready to show.
+ */
 @NullMarked
 public record RenderedDialog(
     Component title,
@@ -42,7 +44,9 @@ public record RenderedDialog(
     public record Button(Component label, @Nullable Component tooltip, int width, String payload) {
     }
 
-    /** A native input; equality and toString skip its callback so unchanged renders stay equal. */
+    /**
+     * A native input; equality and toString skip its callback so unchanged renders stay equal.
+     */
     public record Input(String key, DialogInput input) {
 
         private List<@Nullable Object> values() {

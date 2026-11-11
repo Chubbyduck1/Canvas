@@ -14,7 +14,9 @@ import me.chubbyduck.canvas.state.Scope;
 import me.chubbyduck.canvas.state.State;
 import org.jspecify.annotations.NullMarked;
 
-/** Pages for native inputs and how their values reach state. */
+/**
+ * Pages for native inputs and how their values reach state.
+ */
 @NullMarked
 public final class InputPages {
 

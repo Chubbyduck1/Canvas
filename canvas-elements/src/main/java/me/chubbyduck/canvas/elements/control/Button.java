@@ -16,7 +16,9 @@ import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** A raised OreUI button with a label and/or icon, drawn entirely with Canvas glyphs. */
+/**
+ * A raised OreUI button with a label and/or icon, drawn entirely with Canvas glyphs.
+ */
 @NullMarked
 public class Button extends Node {
 
@@ -79,6 +81,9 @@ public class Button extends Node {
         return selected ? Component.text("> ").append(label).append(Component.text(" <")) : label;
     }
 
+    private static void nothing() {
+    }
+
     @Override
     protected void register(final AssetRegistrar assets) {
         normalSkin = assets.registerNineSlice(Key.key("canvas", "button/normal"), OreSkins.button(Variant.NORMAL));
@@ -131,9 +136,6 @@ public class Button extends Node {
         context.button(selectedLabel(label, this.selected), this.tooltip, this.onClick);
     }
 
-    private static void nothing() {
-    }
-
     public static class Builder {
 
         private @Nullable Component label;
@@ -149,7 +151,9 @@ public class Button extends Node {
             return this;
         }
 
-        /** A styled label. */
+        /**
+         * A styled label.
+         */
         public Builder label(final @Nullable Component label) {
             this.label = label;
             return this;
