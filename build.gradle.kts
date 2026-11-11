@@ -2,7 +2,7 @@ import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
 
 plugins {
-    id("com.gradleup.shadow") version "9.3.1" apply false
+    id("com.gradleup.shadow") version "9.6.1" apply false
     id("net.ltgt.errorprone") version "4.3.0" apply false
     id("xyz.jpenilla.run-paper") version "3.1.0" apply false
 }
