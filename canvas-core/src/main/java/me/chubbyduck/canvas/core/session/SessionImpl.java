@@ -203,7 +203,7 @@ class SessionImpl implements Session {
             }
         }
         if (RenderedDialog.ACTION_CLOSE.equals(action)) {
-            this.closeInternal(CloseReason.ESCAPE, false);
+            this.closeInternal(CloseReason.ESCAPE, true);
             return;
         }
         final Runnable handler = compiled.handlers().get(action);
